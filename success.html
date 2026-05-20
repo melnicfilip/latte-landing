@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Termeni si conditii — Latte.ro</title>
+<title>Mulțumim pentru cerere — Latte.ro</title>
 <link rel="icon" type="image/png" href="/landing/assets/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,7 +12,8 @@
 :root {
   --turq: #52C4B6; --turq-deep: #2FA89A; --offwhite: #FFFCFA;
   --ink: #1D1D1C; --ink-soft: #2B2B29; --line: #1D1D1C14; --mute: #6B6B68;
-  --r-pill: 999px;
+  --r-card: 20px; --r-pill: 999px;
+  --shadow-1: 0 1px 2px rgba(29,29,28,.06), 0 12px 32px -16px rgba(29,29,28,.18);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Manrope', system-ui, sans-serif; font-size: 17px; line-height: 1.55; color: var(--ink); background: var(--offwhite); -webkit-font-smoothing: antialiased; }
@@ -27,17 +28,19 @@ a { color: inherit; }
 .nav-back { font-size: 14px; font-weight: 500; text-decoration: none; color: var(--mute); }
 .nav-back:hover { color: var(--ink); }
 
-.content { max-width: 780px; margin: 0 auto; padding: 64px 28px 96px; }
-@media (max-width: 720px) { .content { padding: 40px 20px 64px; } }
-.content h1 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; margin-bottom: 8px; }
-.content .sub { color: var(--mute); font-size: 14px; margin-bottom: 48px; }
-.content h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 1.2rem; margin-top: 40px; margin-bottom: 12px; color: var(--turq-deep); }
-.content p { color: var(--ink-soft); margin-bottom: 12px; }
-.content ul { padding-left: 20px; color: var(--ink-soft); margin-bottom: 12px; }
-.content li { margin-bottom: 6px; }
-.content a { color: var(--turq-deep); text-decoration: underline; }
+.hero { padding: 80px 0 96px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.check { width: 80px; height: 80px; border-radius: 50%; background: var(--turq); display: grid; place-items: center; margin-bottom: 28px; }
+.check svg { width: 40px; height: 40px; }
+h1 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(36px, 5vw, 56px); letter-spacing: -0.02em; line-height: 0.95; color: var(--turq-deep); margin-bottom: 12px; }
+h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(24px, 3vw, 32px); letter-spacing: -0.02em; margin-bottom: 40px; }
+.video-wrap { position: relative; width: 100%; max-width: 720px; padding-bottom: 40.5%; border-radius: var(--r-card); overflow: hidden; margin-bottom: 36px; border: 1px solid var(--line); box-shadow: var(--shadow-1); }
+.video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+@media (max-width: 720px) { .video-wrap { padding-bottom: 56.25%; } }
+.message { font-size: 19px; color: var(--mute); max-width: 540px; line-height: 1.6; margin-bottom: 40px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: var(--r-pill); font-weight: 600; font-size: 16px; text-decoration: none; background: var(--ink); color: var(--offwhite); transition: transform .15s ease, box-shadow .2s ease; }
+.btn:hover { transform: translateY(-1px); box-shadow: 0 1px 2px rgba(29,29,28,.06), 0 24px 60px -24px rgba(29,29,28,.25); }
 
-footer { background: var(--ink); color: var(--offwhite); padding: 64px 0 32px; }
+footer { background: var(--ink); color: var(--offwhite); padding: 64px 0 32px; margin-top: 0; }
 .foot-grid { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 48px; }
 @media (max-width: 880px) { .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
 @media (max-width: 560px) { .foot-grid { grid-template-columns: 1fr; } }
@@ -57,49 +60,24 @@ footer { background: var(--ink); color: var(--offwhite); padding: 64px 0 32px; }
 <nav class="nav">
   <div class="wrap">
     <div class="nav-inner">
-      <a href="/landing/" class="logo"><span class="glow"></span>latte<span style="color:var(--turq)">.</span>ro</a>
+      <a href="/landing/" class="logo"><span class="glow"></span>latte<span style="color: var(--turq)">.</span>ro</a>
       <a href="/landing/" class="nav-back">Pagina principala</a>
     </div>
   </div>
 </nav>
 
-<div class="content">
-  <h1>Termeni si conditii</h1>
-  <p class="sub">Ultima actualizare: 20 mai 2026</p>
-
-  <h2>1. Informatii generale</h2>
-  <p>Acest site este operat de <strong>Latte Coffee SRL</strong>, cu sediul in Romania. Prin accesarea si utilizarea site-ului <strong>partners.latte.ro</strong>, acceptati acesti termeni si conditii.</p>
-
-  <h2>2. Scopul site-ului</h2>
-  <p>Site-ul are ca scop prezentarea oportunitatii de franciza Latte si colectarea aplicatiilor de la persoanele interesate. Informatiile prezentate sunt cu caracter informativ si nu constituie o oferta ferma de vanzare.</p>
-
-  <h2>3. Formularul de aplicare</h2>
-  <p>Completarea formularului de aplicare nu garanteaza acordarea unei francize. Toate aplicatiile sunt evaluate individual, iar Latte Coffee SRL isi rezerva dreptul de a accepta sau refuza orice candidatura.</p>
-
-  <h2>4. Proprietate intelectuala</h2>
-  <p>Toate elementele site-ului (texte, imagini, logo, design, cod sursa) sunt proprietatea Latte Coffee SRL sau sunt utilizate cu licenta. Reproducerea, copierea sau distribuirea acestora fara acord scris este interzisa.</p>
-
-  <h2>5. Informatii financiare</h2>
-  <p>Cifrele prezentate pe site (costuri, estimari de profit, randament) sunt orientative si se bazeaza pe date medii din reteaua existenta. Rezultatele reale pot varia in functie de locatie, gestionare si alti factori.</p>
-
-  <h2>6. Limitarea raspunderii</h2>
-  <p>Latte Coffee SRL nu garanteaza disponibilitatea neintrerupta a site-ului si nu raspunde pentru daune indirecte rezultate din utilizarea sau imposibilitatea utilizarii site-ului.</p>
-
-  <h2>7. Linkuri externe</h2>
-  <p>Site-ul poate contine linkuri catre alte site-uri. Nu suntem responsabili pentru continutul sau politicile de confidentialitate ale site-urilor terte.</p>
-
-  <h2>8. Protectia datelor</h2>
-  <p>Prelucrarea datelor personale se face conform <a href="/landing/politica-confidentialitate.html">Politicii de confidentialitate</a>.</p>
-
-  <h2>9. Solutionarea litigiilor</h2>
-  <p>Consumatorii pot depune reclamatii prin platforma europeana SOL (<a href="https://ec.europa.eu/consumers/odr">ec.europa.eu/consumers/odr</a>) sau prin ANPC (<a href="https://anpc.ro/">anpc.ro</a>).</p>
-
-  <h2>10. Legea aplicabila</h2>
-  <p>Acesti termeni sunt guvernati de legislatia romana. Orice litigiu va fi solutionat de instantele competente din Romania.</p>
-
-  <h2>11. Modificari</h2>
-  <p>Ne rezervam dreptul de a modifica acesti termeni. Versiunea actualizata va fi publicata pe aceasta pagina.</p>
-</div>
+<section class="hero">
+  <div class="check">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+  </div>
+  <h1>Success!</h1>
+  <h2>Multumim pentru cerere</h2>
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/xYZ7dX9n5k8?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Prezentare Latte"></iframe>
+  </div>
+  <p class="message">O sa va contactam in curand pentru a va oferi mai multe detalii.</p>
+  <a href="/landing/" class="btn">Revino la pagina principala</a>
+</section>
 
 <footer>
   <div class="wrap">
