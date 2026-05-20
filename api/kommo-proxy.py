@@ -92,7 +92,8 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
 
         try:
             result = self._kommo_post("/api/v4/leads/unsorted/forms", [payload])
-            lead_uid = result.get("uid", "")
+            unsorted = result.get("_embedded", {}).get("unsorted", [])
+            lead_uid = unsorted[0].get("uid", "") if unsorted else ""
 
             if lead_uid:
                 self._add_note(lead_uid, "\n".join(note_lines))
