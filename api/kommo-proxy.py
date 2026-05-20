@@ -91,7 +91,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
             contact_fields.append({"field_code": "EMAIL", "values": [{"value": email}]})
 
         try:
-            result = self._kommo_post("/api/v4/leads/unsorted/forms", payload)
+            result = self._kommo_post("/api/v4/leads/unsorted/forms", [payload])
             lead_uid = result.get("uid", "")
 
             if lead_uid:
