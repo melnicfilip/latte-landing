@@ -328,8 +328,8 @@ function FinalCTA() {
       body: JSON.stringify(form),
     })
       .then(r => r.json())
-      .then(() => { setSent(true); setSending(false); })
-      .catch(() => { setSent(true); setSending(false); });
+      .then(() => { window.location.href = "/landing/multumim.html"; })
+      .catch(() => { window.location.href = "/landing/multumim.html"; });
   };
 
   const RadioGroup = ({ name, options, cols }) => (
