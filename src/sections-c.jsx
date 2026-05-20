@@ -302,7 +302,7 @@ function FinalCTA() {
   const requiredByStep = {
     1: ["ocupatie", "domeniu", "cunostinte_franciza"],
     2: ["motiv", "buget", "oras"],
-    3: ["spatiu"],
+    3: ["spatiu", "asteptari_profit", "recuperare_investitie", "sursa"],
     4: ["nume", "email", "tel"],
   };
 
@@ -402,15 +402,15 @@ function FinalCTA() {
                     <RadioGroup name="spatiu" options={["Da", "Nu", "Am pus întrebări", "Nu m-am interesat"]} cols={2} />
                   </div>
                   <div className="field">
-                    <label htmlFor="asteptari_profit">Ce așteptări ai de profit?</label>
+                    <label htmlFor="asteptari_profit">Ce așteptări ai de profit? {errors.asteptari_profit && <span className="field-err">* obligatoriu</span>}</label>
                     <input id="asteptari_profit" value={form.asteptari_profit} onChange={upd("asteptari_profit")} placeholder="Ex: 2.000 lei / lună" />
                   </div>
                   <div className="field">
-                    <label htmlFor="recuperare_investitie">În cât timp vrei să recuperezi investiția</label>
+                    <label htmlFor="recuperare_investitie">În cât timp vrei să recuperezi investiția {errors.recuperare_investitie && <span className="field-err">* obligatoriu</span>}</label>
                     <input id="recuperare_investitie" value={form.recuperare_investitie} onChange={upd("recuperare_investitie")} placeholder="Ex: 6 luni" />
                   </div>
                   <div className="field">
-                    <label htmlFor="sursa">De unde ai aflat de franciza Latte?</label>
+                    <label htmlFor="sursa">De unde ai aflat de franciza Latte? {errors.sursa && <span className="field-err">* obligatoriu</span>}</label>
                     <input id="sursa" value={form.sursa} onChange={upd("sursa")} placeholder="Facebook | TikTok | OLX | Articole | Recomandări | Prieteni" />
                   </div>
                 </div>
