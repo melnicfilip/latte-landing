@@ -12,6 +12,7 @@ from datetime import datetime
 PORT = 4500
 KOMMO_API = "https://lattero.kommo.com"
 KOMMO_TOKEN = os.environ.get("KOMMO_TOKEN", "")
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
 
 class FormHandler(http.server.BaseHTTPRequestHandler):
     def _cors(self):
@@ -84,6 +85,8 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
 
             if lead_uid:
                 self._enrich_lead(lead_uid, data)
+
+            self._brevo_sync(data, nome, email, tel)
 
             self._respond(200, {"ok": True, "uid": lead_uid})
             print(f"[{datetime.now().isoformat()}] Lead created: {nome} ({oras}) — uid={lead_uid}")
@@ -168,6 +171,47 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
 
         except Exception as e:
             print(f"[{datetime.now().isoformat()}] Enrich warning: {e}", file=sys.stderr)
+
+    def _brevo_sync(self, data, name, email, tel):
+        """Add or update contact in Brevo list #2."""
+        if not BREVO_API_KEY or not email:
+            return
+        try:
+            payload = {
+                "email": email,
+                "listIds": [2],
+                "updateEnabled": True,
+                "attributes": {
+                    "FIRSTNAME": name,
+                    "SMS": tel,
+                    "OCUPATIE": data.get("ocupatie", ""),
+                    "DOMENIU": data.get("domeniu", ""),
+                    "CUNOSTINTE_FRANCIZA": data.get("cunostinte_franciza", ""),
+                    "MOTIV": data.get("motiv", ""),
+                    "BUGET": data.get("buget", ""),
+                    "ORAS": data.get("oras", ""),
+                    "SPATIU": data.get("spatiu", ""),
+                    "ASTEPTARI_PROFIT": data.get("asteptari_profit", ""),
+                    "RECUPERARE_INVESTITIE": data.get("recuperare_investitie", ""),
+                    "SURSA": data.get("sursa", ""),
+                },
+            }
+            req = urllib.request.Request(
+                "https://api.brevo.com/v3/contacts",
+                data=json.dumps(payload).encode(),
+                headers={
+                    "api-key": BREVO_API_KEY,
+                    "Content-Type": "application/json",
+                },
+            )
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                resp.read()
+            print(f"[{datetime.now().isoformat()}] Brevo: synced {email}")
+        except urllib.error.HTTPError as e:
+            body = e.read().decode()
+            print(f"[{datetime.now().isoformat()}] Brevo warning: {e.code} {body}", file=sys.stderr)
+        except Exception as e:
+            print(f"[{datetime.now().isoformat()}] Brevo warning: {e}", file=sys.stderr)
 
     def _respond(self, code, data):
         self.send_response(code)
