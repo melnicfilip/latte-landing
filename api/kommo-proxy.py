@@ -25,7 +25,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_POST(self):
-        if self.path != "/submit":
+        if self.path not in ("/submit", "/api/submit"):
             self.send_response(404)
             self.end_headers()
             return
