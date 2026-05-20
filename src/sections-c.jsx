@@ -5,7 +5,7 @@ function Process() {
     { n: "01", w: "Săptămâna 1", t: "Pregătire acte", b: ["Aplici pe WhatsApp", "Discuție 30 min cu account manager", "Semnare contract franciză", "Avans pentru aparat"] },
     { n: "02", w: "Săptămâna 2", t: "Căutare locație", b: ["Primești ghidul de evaluare", "Validăm împreună 2—3 opțiuni", "Negociere contract chirie", "Aprobare finală locație"] },
     { n: "03", w: "Săptămâna 3", t: "Instalare & training", b: ["Livrăm aparatul", "Montaj + setare 1 zi", "Training 4h: meniu, încărcare, app", "Materie primă pentru 300 pahare"] },
-    { n: "04", w: "Săptămâna 4", t: "Lansare & operare", b: ["Setare promovare locală", "Primii clienți, primele încasări", "Account manager check zilnic", "Mentenanță remote 24/7 activă"] },
+    { n: "04", w: "Săptămâna 4", t: "Lansare & operare", b: ["Setare promovare locală", "Primii clienți, primele încasări", "Account manager check zilnic", "Mentenanță remote activă"] },
   ];
   return (
     <section>
@@ -55,7 +55,7 @@ function PhoneSection() {
               { I: IcChart, t: "Vânzări zilnice / lunare / anuale", d: "Pe pahar, pe rețetă, pe oră." },
               { I: IcMilk, t: "Stocuri în timp real", d: "Cafea, lapte, pahare — alertă la 20%." },
               { I: IcBell, t: "Notificări email & WhatsApp", d: "Pentru alarme, bonuri, mentenanță." },
-              { I: IcWrench, t: "Diagnostic & service remote", d: "Tehnic resetează din birou. 24/7." },
+              { I: IcWrench, t: "Diagnostic & service remote", d: "Tehnic resetează din birou." },
               { I: IcEye, t: "Control fiscal complet", d: "Bonuri, raport Z, declarații ANAF." },
             ].map((f, i) => (
               <div className="phone-feat" key={i}>
@@ -252,8 +252,8 @@ function FAQ() {
     { q: "În cât timp îmi recuperez investiția?", a: "Tipic în 2—5 luni, în funcție de locație și volum. La 50 pahare/zi în mediu, recuperarea e sub 4 luni. La locații foarte bune (centre comerciale mari, gări), uneori în 60 de zile." },
     { q: "Cum caut locația — eu sau voi?", a: "Tu cauți, noi validăm. Primești ghidul de evaluare și criteriile. Account managerul aprobă oricâte locații vrei să propui — și negociem împreună chiria, dacă e cazul." },
     { q: "Ce este de fapt inclus în 3.000€?", a: "Aparatul Latte echipat (în comodat), brandul, livrarea + montajul, training, platforma, telemetria fiscalizată, 300 pahare materie primă, account manager dedicat și acces la comunitatea partenerilor. Vezi secțiunea Preț pentru detalii." },
-    { q: "De unde cumpăr materia primă după primele 300 pahare?", a: "De la noi, pe platformă. Prețuri negociate la volum mare — cafea Dropshot, lapte natural de la furnizor partener, siropuri și pahare branded." },
-    { q: "Ce fac dacă se defectează aparatul?", a: "Diagnostic remote 24/7 — 80% din probleme se rezolvă fără deplasare. Pentru rest, tehnicieni în toată țara cu intervenție în 24—48h. Înlocuim piese din stoc." },
+    { q: "De unde cumpăr materia primă după primele 300 pahare?", a: "De la noi, pe platformă. Prețuri negociate la volum mare — cafea Beandrops, lapte natural de la furnizor partener, siropuri și pahare branded." },
+    { q: "Ce fac dacă se defectează aparatul?", a: "Diagnostic remote — 80% din probleme se rezolvă fără deplasare. Pentru rest, tehnicieni în toată țara cu intervenție în 24—48h. Înlocuim piese din stoc." },
     { q: "E franciză sau cumpăr aparatul?", a: "E franciză. Aparatul rămâne al nostru, ție îți rămâne business-ul (locație, încasări, profit). Asta îți permite să intri cu 3.000€, nu cu 15.000€+ cât costă un aparat profesional cumpărat." },
     { q: "Am nevoie de experiență în HoReCa?", a: "Nu. Majoritatea partenerilor noștri lucrau în alte domenii — IT, vânzări, construcții, profesori. Training-ul nostru e de o zi. Restul e operare simplă: încărcare, golit numerar, curățenie săptămânală." },
     { q: "Câte ore îmi ia să mă ocup săptămânal?", a: "În medie 3 ore / aparat / săptămână: încărcare consumabile, vidare numerar, curățenie. Restul rulează singur — și vezi totul live pe telefon." },
@@ -471,7 +471,7 @@ function FinalCTA() {
               </div>
 
               <div className="form-foot">
-                Datele tale nu sunt partajate cu terți. <a href="#" style={{ color: "var(--ink)", textDecoration: "underline" }}>Politica de confidențialitate</a>.
+                Datele tale nu sunt partajate cu terți. <a href="/landing/politica-confidentialitate.html" style={{ color: "var(--ink)", textDecoration: "underline" }}>Politica de confidențialitate</a>.
               </div>
             </>
           )}
@@ -494,10 +494,10 @@ function Footer() {
               Franciză self-service de cafea cu lapte natural. Brand românesc, fondat 2022.
             </p>
             <div style={{ display: "flex", gap: 12, marginTop: 20 }}>
-              <a href="https://instagram.com/latte.romania" aria-label="Instagram" style={{ width: 38, height: 38, borderRadius: 999, border: "1px solid rgba(255,252,250,.2)", display: "grid", placeItems: "center" }}>
+              <a href="https://www.instagram.com/latte.romania" aria-label="Instagram" style={{ width: 38, height: 38, borderRadius: 999, border: "1px solid rgba(255,252,250,.2)", display: "grid", placeItems: "center" }}>
                 <IcInsta size={18} />
               </a>
-              <a href="#" aria-label="Facebook" style={{ width: 38, height: 38, borderRadius: 999, border: "1px solid rgba(255,252,250,.2)", display: "grid", placeItems: "center" }}>
+              <a href="https://www.facebook.com/Latte.business" aria-label="Facebook" style={{ width: 38, height: 38, borderRadius: 999, border: "1px solid rgba(255,252,250,.2)", display: "grid", placeItems: "center" }}>
                 <IcFb size={18} />
               </a>
               <a href="https://wa.me/40725965987" aria-label="WhatsApp" style={{ width: 38, height: 38, borderRadius: 999, border: "1px solid rgba(255,252,250,.2)", display: "grid", placeItems: "center" }}>
@@ -520,8 +520,8 @@ function Footer() {
           </div>
           <div className="foot-col">
             <h5>Legal</h5>
-            <a href="#">Politica de confidențialitate</a>
-            <a href="#">Termeni și condiții</a>
+            <a href="/landing/politica-confidentialitate.html">Politica de confidențialitate</a>
+            <a href="/landing/termeni-si-conditii.html">Termeni și condiții</a>
             <a href="https://anpc.ro/">ANPC — SAL / SOL</a>
           </div>
         </div>

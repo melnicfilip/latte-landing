@@ -2,7 +2,7 @@
 
 function Ticker() {
   const items = [
-    "150+ cafenele active în România",
+    "250+ cafenele active în România",
     "Lapte natural • Nu praf",
     "18 rețete • Cafea 100% Arabica",
     "Brand românesc, fondat 2022",
@@ -59,7 +59,7 @@ function Hero() {
             <a href="#calculator" className="btn btn-ghost">Vezi calculatorul de profit</a>
           </div>
           <div className="hero-trust">
-            <div className="trust-item"><div className="trust-num">150+</div><div className="trust-label">cafenele active</div></div>
+            <div className="trust-item"><div className="trust-num">250+</div><div className="trust-label">cafenele active</div></div>
             <div className="trust-item"><div className="trust-num">100%</div><div className="trust-label">Arabica</div></div>
             <div className="trust-item"><div className="trust-num">Natural</div><div className="trust-label">lapte, nu praf</div></div>
             <div className="trust-item"><div className="trust-num">RO</div><div className="trust-label">brand românesc</div></div>
@@ -86,12 +86,12 @@ function Concept() {
         <div>
           <span className="eyebrow"><span className="dot"></span>Ce este Latte</span>
           <h2 className="display" style={{ marginTop: 18 }}>
-            Cafenea în 1m².<br/>Brand cu 150 de locații.
+            Cafenea în 1m².<br/>Brand cu 250 de locații.
           </h2>
           <p className="lede" style={{ marginTop: 22 }}>
             Latte e o franciză self-service de cafea, fondată în 2022 în România.
             În 2025 am făcut upgrade complet la <strong>lapte natural</strong> — nu praf, nu surogat.
-            Astăzi sunt peste 150 de aparate în țară, în birouri, mall-uri, supermarket-uri și facultăți.
+            Astăzi sunt peste 250 de aparate în țară, în birouri, mall-uri, supermarket-uri și facultăți.
           </p>
           <div style={{ marginTop: 32, display: "flex", gap: 32 }}>
             <div>
@@ -143,7 +143,7 @@ function Price() {
     { n: "05", t: "Telemetrie fiscalizată", d: "Vezi încasările live, pe telefon. Toate raportate ANAF.", I: IcChart },
     { n: "06", t: "Account manager", d: "O persoană dedicată ție. Răspunde pe WhatsApp.", I: IcUsers },
     { n: "07", t: "Materie primă pentru 300 pahare", d: "Cafea, lapte, siropuri — pentru primele zile.", I: IcMilk },
-    { n: "08", t: "Service & mentenanță", d: "Tehnicieni în toată țara. Diagnostic remote 24/7.", I: IcWrench },
+    { n: "08", t: "Service & mentenanță", d: "Tehnicieni în toată țara. Diagnostic remote.", I: IcWrench },
     { n: "09", t: "Comunitate WhatsApp", d: "Acces la grupul partenerilor, sfaturi, locații.", I: IcWhats },
     { n: "10", t: "Ghid de locație", d: "Modelul nostru de evaluare locații + checklist.", I: IcDoc },
   ];
