@@ -525,6 +525,17 @@ function Footer() {
             <a href="https://anpc.ro/">ANPC — SAL / SOL</a>
           </div>
         </div>
+        <div style={{ marginTop: 48, borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,252,250,.1)" }}>
+          <iframe
+            src="https://www.google.com/maps/d/u/0/embed?mid=1M4HyXJjdiV2SSl0rdVs0JZiKYkVN18o&ll=46.18707645754629%2C25.557345751133568&z=6"
+            width="100%"
+            height="400"
+            style={{ border: 0, display: "block" }}
+            allowFullScreen=""
+            loading="lazy"
+            title="Harta locațiilor Latte"
+          ></iframe>
+        </div>
         <div className="foot-bot">
           <span>© 2026 Latte Coffee SRL · CUI RO12345678</span>
           <span style={{ fontFamily: "JetBrains Mono" }}>// hai să bem o cafea</span>
