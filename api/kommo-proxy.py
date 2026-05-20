@@ -44,19 +44,6 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
         tel = data.get("tel", "")
         oras = data.get("oras", "")
 
-        note_lines = [
-            f"Ocupație: {data.get('ocupatie', '-')}",
-            f"Domeniu: {data.get('domeniu', '-')}",
-            f"Cunoștințe franciză: {data.get('cunostinte_franciza', '-')}",
-            f"Motiv: {data.get('motiv', '-')}",
-            f"Buget: {data.get('buget', '-')}",
-            f"Oraș: {oras}",
-            f"Spațiu găsit: {data.get('spatiu', '-')}",
-            f"Așteptări profit: {data.get('asteptari_profit', '-')}",
-            f"Recuperare investiție: {data.get('recuperare_investitie', '-')}",
-            f"Sursă: {data.get('sursa', '-')}",
-        ]
-
         now = int(datetime.now().timestamp())
 
         payload = {
@@ -96,7 +83,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
             lead_uid = unsorted[0].get("uid", "") if unsorted else ""
 
             if lead_uid:
-                self._add_note(lead_uid, "\n".join(note_lines))
+                self._enrich_lead(lead_uid, data)
 
             self._respond(200, {"ok": True, "uid": lead_uid})
             print(f"[{datetime.now().isoformat()}] Lead created: {nome} ({oras}) — uid={lead_uid}")
@@ -121,8 +108,25 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
             body = e.read().decode()
             raise Exception(f"Kommo API {e.code}: {body}")
 
-    def _add_note(self, unsorted_uid, text):
-        """Try to add a note. Non-critical — if it fails we still have the lead."""
+    def _kommo_patch(self, path, data):
+        req = urllib.request.Request(
+            f"{KOMMO_API}{path}",
+            data=json.dumps(data).encode(),
+            headers={
+                "Authorization": f"Bearer {KOMMO_TOKEN}",
+                "Content-Type": "application/json",
+            },
+            method="PATCH",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                return json.loads(resp.read())
+        except urllib.error.HTTPError as e:
+            body = e.read().decode()
+            raise Exception(f"Kommo API PATCH {e.code}: {body}")
+
+    def _enrich_lead(self, unsorted_uid, data):
+        """Accept the unsorted lead and fill custom fields."""
         try:
             accept_payload = {
                 "user_id": 0,
@@ -136,11 +140,34 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
                 if leads:
                     lead_id = leads[0].get("id")
 
-            if lead_id:
-                note_payload = [{"note_type": "common", "params": {"text": text}}]
-                self._kommo_post(f"/api/v4/leads/{lead_id}/notes", note_payload)
+            if not lead_id:
+                return
+
+            field_map = {
+                "ocupatie": 2927931,           # OCUPATIA_ACTUALA
+                "cunostinte_franciza": 2927933, # CUNOSTINTE_FRAINCIZA
+                "motiv": 2927935,              # MOTIVUL_ALGERII
+                "buget": 2927937,              # BUGET_ALOCAT
+                "oras": 2927939,               # ORAS
+                "spatiu": 2927941,             # AI_GASIT_SPATIU
+                "asteptari_profit": 2927943,   # ASTEPTARI_PROFIT
+                "recuperare_investitie": 2927945, # RECUPERARE_INVESTITIE
+                "sursa": 2927947,              # DE_UNDE_AI_AFLAT
+                "domeniu": 2927483,            # Domeniu activitate
+            }
+
+            fields = []
+            for form_key, field_id in field_map.items():
+                val = data.get(form_key, "")
+                if val:
+                    fields.append({"field_id": field_id, "values": [{"value": val}]})
+
+            if fields:
+                patch = [{"id": lead_id, "custom_fields_values": fields}]
+                self._kommo_patch("/api/v4/leads", patch)
+
         except Exception as e:
-            print(f"[{datetime.now().isoformat()}] Note/accept warning: {e}", file=sys.stderr)
+            print(f"[{datetime.now().isoformat()}] Enrich warning: {e}", file=sys.stderr)
 
     def _respond(self, code, data):
         self.send_response(code)
