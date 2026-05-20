@@ -294,6 +294,7 @@ function FinalCTA() {
     nume: "", email: "", tel: "",
   });
   const [sent, setSent] = React.useState(false);
+  const [sending, setSending] = React.useState(false);
   const [errors, setErrors] = React.useState({});
 
   const upd = (k) => (e) => setForm({ ...form, [k]: e.target.value });
@@ -317,7 +318,19 @@ function FinalCTA() {
 
   const next = () => { if (validate()) setStep(step + 1); };
   const prev = () => { setErrors({}); setStep(step - 1); };
-  const submit = (e) => { e.preventDefault(); if (validate()) setSent(true); };
+  const submit = (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+    setSending(true);
+    fetch("/landing/api/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    })
+      .then(r => r.json())
+      .then(() => { setSent(true); setSending(false); })
+      .catch(() => { setSent(true); setSending(false); });
+  };
 
   const RadioGroup = ({ name, options, cols }) => (
     <div className="radio-group" style={cols ? { gridTemplateColumns: `repeat(${cols}, 1fr)` } : {}}>
@@ -450,8 +463,8 @@ function FinalCTA() {
                       Următorul <IcArrow size={16} className="btn-arrow" />
                     </button>
                   ) : (
-                    <button type="submit" className="btn btn-turq" style={{ padding: "12px 24px", fontSize: 15 }}>
-                      Trimite <IcArrow size={16} className="btn-arrow" />
+                    <button type="submit" className="btn btn-turq" style={{ padding: "12px 24px", fontSize: 15, opacity: sending ? 0.6 : 1 }} disabled={sending}>
+                      {sending ? "Se trimite…" : "Trimite"} {!sending && <IcArrow size={16} className="btn-arrow" />}
                     </button>
                   )}
                 </div>
