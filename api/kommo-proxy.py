@@ -126,7 +126,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
         try:
             accept_payload = {
                 "user_id": 0,
-                "status_id": 0,
+                "status_id": 44382739,
             }
             result = self._kommo_post(f"/api/v4/leads/unsorted/{unsorted_uid}/accept", accept_payload)
 
