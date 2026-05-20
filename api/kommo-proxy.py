@@ -186,14 +186,14 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
                     "TELEFON": tel,
                     "OCUPATIA_ACTUALA": data.get("ocupatie", ""),
                     "DOMENIU_DE_ACTIVITATE": data.get("domeniu", ""),
-                    "CUNOSTINTE_FRAINCIZA": data.get("cunostinte_franciza", ""),
+                    "CAT_DE_BINE_CUNOASTI_CONCEPTUL_DE_FRANCIZA": data.get("cunostinte_franciza", ""),
                     "MOTIVUL_ALGERII": data.get("motiv", ""),
-                    "BUGET": data.get("buget", ""),
+                    "BUGET_ALOCAT": data.get("buget", ""),
                     "ORAS": data.get("oras", ""),
-                    "SPATIU": data.get("spatiu", ""),
+                    "AI_GASIT_SPATIU": data.get("spatiu", ""),
                     "ASTEPTARI_PROFIT": data.get("asteptari_profit", ""),
                     "RECUPERARE_INVESTITIE": data.get("recuperare_investitie", ""),
-                    "SURSA": data.get("sursa", ""),
+                    "DE_UNDE_AI_AFLAT": data.get("sursa", ""),
                 },
             }
             req = urllib.request.Request(
