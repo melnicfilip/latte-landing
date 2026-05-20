@@ -286,10 +286,51 @@ function FAQ() {
 }
 
 function FinalCTA() {
-  const [form, setForm] = React.useState({ nume: "", tel: "", email: "", oras: "", locatie: "Caut acum" });
+  const [step, setStep] = React.useState(1);
+  const [form, setForm] = React.useState({
+    ocupatie: "", domeniu: "", cunostinte_franciza: "",
+    motiv: "", buget: "", oras: "",
+    spatiu: "", asteptari_profit: "", recuperare_investitie: "", sursa: "",
+    nume: "", email: "", tel: "",
+  });
   const [sent, setSent] = React.useState(false);
+  const [errors, setErrors] = React.useState({});
+
   const upd = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-  const submit = (e) => { e.preventDefault(); setSent(true); };
+  const pick = (k, v) => () => setForm({ ...form, [k]: v });
+
+  const requiredByStep = {
+    1: ["ocupatie", "domeniu", "cunostinte_franciza"],
+    2: ["motiv", "buget", "oras"],
+    3: ["spatiu"],
+    4: ["nume", "email", "tel"],
+  };
+
+  const validate = () => {
+    const errs = {};
+    (requiredByStep[step] || []).forEach(k => {
+      if (!form[k].trim()) errs[k] = true;
+    });
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
+  const next = () => { if (validate()) setStep(step + 1); };
+  const prev = () => { setErrors({}); setStep(step - 1); };
+  const submit = (e) => { e.preventDefault(); if (validate()) setSent(true); };
+
+  const RadioGroup = ({ name, options, cols }) => (
+    <div className="radio-group" style={cols ? { gridTemplateColumns: `repeat(${cols}, 1fr)` } : {}}>
+      {options.map(o => (
+        <label key={o} className={`radio-opt ${form[name] === o ? "active" : ""}`} onClick={pick(name, o)}>
+          <span className="radio-dot">{form[name] === o && <span className="radio-fill"></span>}</span>
+          {o}
+        </label>
+      ))}
+    </div>
+  );
+
+  const progressWidth = `${(step / 4) * 100}%`;
 
   return (
     <section className="final-cta" id="aplica">
@@ -297,63 +338,127 @@ function FinalCTA() {
         <div>
           <span className="eyebrow" style={{ background: "rgba(29,29,28,.12)" }}><span className="dot" style={{background:"#1D1D1C"}}></span>Aplică acum</span>
           <h2 className="display" style={{ marginTop: 18 }}>
-            Devino partener Latte.
+            Hai să ne cunoaștem!
           </h2>
           <p className="lede" style={{ marginTop: 22, color: "var(--ink-soft)", maxWidth: 480 }}>
-            Te contactăm pe WhatsApp în maxim 24h. <strong>Nu sunăm de pe număr necunoscut</strong> — răspundem la mesajul tău.
+            Completează formularul ca să îți oferim o ofertă personalizată. Durează sub 2 minute.
           </p>
-          <a href="https://wa.me/40725965987?text=Salut%2C%20vreau%20detalii%20despre%20franciza%20Latte" className="btn btn-primary" style={{ marginTop: 28 }}>
-            <IcWhats size={18} /> Scrie-ne pe WhatsApp <IcArrow size={18} className="btn-arrow" />
-          </a>
           <div style={{ marginTop: 20, fontFamily: "JetBrains Mono", fontSize: 14, color: "var(--ink-soft)" }}>
             +40 725 965 987 · info@latte.ro
           </div>
         </div>
 
         <form className="form-card" onSubmit={submit}>
+          <div className="form-progress"><div className="form-progress-bar" style={{ width: progressWidth }}></div></div>
+
           {sent ? (
             <div style={{ textAlign: "center", padding: "32px 16px" }}>
               <div style={{ width: 64, height: 64, borderRadius: 999, background: "var(--turq)", display: "grid", placeItems: "center", margin: "0 auto 20px" }}>
-                <IcWhats size={32} color="#1D1D1C" />
+                <IcStar size={32} color="#1D1D1C" />
               </div>
-              <h3 className="display" style={{ fontSize: 28 }}>Mesaj trimis!</h3>
-              <p style={{ color: "var(--mute)", marginTop: 12 }}>Revenim pe WhatsApp în maxim 24h, la <strong>{form.tel}</strong>.</p>
+              <h3 className="display" style={{ fontSize: 28 }}>Mulțumim!</h3>
+              <p style={{ color: "var(--mute)", marginTop: 12 }}>Te vom contacta în curând cu o ofertă personalizată la <strong>{form.email}</strong>.</p>
             </div>
           ) : (
             <>
-              <div className="field">
-                <label htmlFor="nume">Nume complet</label>
-                <input id="nume" required value={form.nume} onChange={upd("nume")} placeholder="Ion Popescu" />
+              {step === 1 && (
+                <div className="form-step">
+                  <div className="field">
+                    <label>Ocupația actuală {errors.ocupatie && <span className="field-err">* obligatoriu</span>}</label>
+                    <RadioGroup name="ocupatie" options={["Angajat full-time", "Angajat part-time", "Antreprenor", "Liber profesionist"]} cols={2} />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="domeniu">Domeniu de activitate {errors.domeniu && <span className="field-err">* obligatoriu</span>}</label>
+                    <input id="domeniu" value={form.domeniu} onChange={upd("domeniu")} placeholder="Industria în care activezi" />
+                  </div>
+                  <div className="field">
+                    <label>Cât de bine cunoști conceptul de franciză? {errors.cunostinte_franciza && <span className="field-err">* obligatoriu</span>}</label>
+                    <RadioGroup name="cunostinte_franciza" options={["Deloc", "Bine", "Foarte bine"]} cols={3} />
+                  </div>
+                </div>
+              )}
+
+              {step === 2 && (
+                <div className="form-step">
+                  <div className="field">
+                    <label htmlFor="motiv">Motivul pentru care ai ales franciza Latte {errors.motiv && <span className="field-err">* obligatoriu</span>}</label>
+                    <input id="motiv" value={form.motiv} onChange={upd("motiv")} placeholder="Ce te-a atras la Latte?" />
+                  </div>
+                  <div className="field">
+                    <label>Bugetul alocat acestui proiect {errors.buget && <span className="field-err">* obligatoriu</span>}</label>
+                    <RadioGroup name="buget" options={["3.000€", "6.000€", "Mai mult de 9.000€"]} cols={3} />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="oras">Oraș {errors.oras && <span className="field-err">* obligatoriu</span>}</label>
+                    <input id="oras" value={form.oras} onChange={upd("oras")} placeholder="Orașul în care vrei să deschizi" />
+                  </div>
+                </div>
+              )}
+
+              {step === 3 && (
+                <div className="form-step">
+                  <div className="field">
+                    <label>Ai găsit un spațiu? {errors.spatiu && <span className="field-err">* obligatoriu</span>}</label>
+                    <RadioGroup name="spatiu" options={["Da", "Nu", "Am pus întrebări", "Nu m-am interesat"]} cols={2} />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="asteptari_profit">Ce așteptări ai de profit?</label>
+                    <input id="asteptari_profit" value={form.asteptari_profit} onChange={upd("asteptari_profit")} placeholder="Ex: 2.000 lei / lună" />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="recuperare_investitie">În cât timp vrei să recuperezi investiția</label>
+                    <input id="recuperare_investitie" value={form.recuperare_investitie} onChange={upd("recuperare_investitie")} placeholder="Ex: 6 luni" />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="sursa">De unde ai aflat de franciza Latte?</label>
+                    <input id="sursa" value={form.sursa} onChange={upd("sursa")} placeholder="Facebook | TikTok | OLX | Articole | Recomandări | Prieteni" />
+                  </div>
+                </div>
+              )}
+
+              {step === 4 && (
+                <div className="form-step">
+                  <div style={{ marginBottom: 20 }}>
+                    <h3 className="display" style={{ fontSize: 22, marginBottom: 6 }}>Primește oferta personalizată!</h3>
+                    <p style={{ fontSize: 14, color: "var(--mute)" }}>Ultimul pas — completează datele de contact.</p>
+                  </div>
+                  <div className="field">
+                    <label htmlFor="nume">Numele tău {errors.nume && <span className="field-err">* obligatoriu</span>}</label>
+                    <input id="nume" value={form.nume} onChange={upd("nume")} placeholder="Alex" />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="email">Email-ul tău {errors.email && <span className="field-err">* obligatoriu</span>}</label>
+                    <input id="email" type="email" value={form.email} onChange={upd("email")} placeholder="exemplu@gmail.com" />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="tel">Număr de telefon {errors.tel && <span className="field-err">* obligatoriu</span>}</label>
+                    <input id="tel" type="tel" value={form.tel} onChange={upd("tel")} placeholder="07XXXXXXXX" />
+                  </div>
+                </div>
+              )}
+
+              <div className="form-nav">
+                <div className="form-step-label">Pas {step} din 4</div>
+                <div style={{ display: "flex", gap: 10 }}>
+                  {step > 1 && (
+                    <button type="button" className="btn btn-ghost" style={{ padding: "12px 20px", fontSize: 15 }} onClick={prev}>
+                      ← Înapoi
+                    </button>
+                  )}
+                  {step < 4 ? (
+                    <button type="button" className="btn btn-turq" style={{ padding: "12px 24px", fontSize: 15 }} onClick={next}>
+                      Următorul <IcArrow size={16} className="btn-arrow" />
+                    </button>
+                  ) : (
+                    <button type="submit" className="btn btn-turq" style={{ padding: "12px 24px", fontSize: 15 }}>
+                      Trimite <IcArrow size={16} className="btn-arrow" />
+                    </button>
+                  )}
+                </div>
               </div>
-              <div className="field-row">
-                <div className="field">
-                  <label htmlFor="tel">Telefon (WhatsApp) *</label>
-                  <input id="tel" required type="tel" value={form.tel} onChange={upd("tel")} placeholder="+40 7…" />
-                </div>
-                <div className="field">
-                  <label htmlFor="email">Email</label>
-                  <input id="email" type="email" value={form.email} onChange={upd("email")} placeholder="ion@email.com" />
-                </div>
-              </div>
-              <div className="field-row">
-                <div className="field">
-                  <label htmlFor="oras">Oraș</label>
-                  <input id="oras" value={form.oras} onChange={upd("oras")} placeholder="Cluj-Napoca" />
-                </div>
-                <div className="field">
-                  <label htmlFor="locatie">Ai în vedere o locație?</label>
-                  <select id="locatie" value={form.locatie} onChange={upd("locatie")}>
-                    <option>Da, am una</option>
-                    <option>Caut acum</option>
-                    <option>Nu încă, vreau detalii</option>
-                  </select>
-                </div>
-              </div>
-              <button type="submit" className="btn btn-turq" style={{ width: "100%", justifyContent: "center", padding: "18px 26px", fontSize: 17 }}>
-                Aplică pentru franciză <IcArrow size={20} className="btn-arrow" />
-              </button>
+
               <div className="form-foot">
-                Te contactăm pe WhatsApp în maxim 24h la +40 725 965 987. Datele tale nu sunt partajate. <a href="#" style={{ color: "var(--ink)", textDecoration: "underline" }}>Politica de confidențialitate</a>.
+                Datele tale nu sunt partajate cu terți. <a href="#" style={{ color: "var(--ink)", textDecoration: "underline" }}>Politica de confidențialitate</a>.
               </div>
             </>
           )}
