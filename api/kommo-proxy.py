@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 
 PORT = 4500
-KOMMO_API = "https://api-g.kommo.com"
+KOMMO_API = "https://lattero.kommo.com"
 KOMMO_TOKEN = os.environ.get("KOMMO_TOKEN", "")
 
 class FormHandler(http.server.BaseHTTPRequestHandler):
