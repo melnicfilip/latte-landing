@@ -68,22 +68,22 @@ footer { background: var(--ink); color: var(--offwhite); padding: 64px 0 32px; }
   <p class="sub">Ultima actualizare: 20 mai 2026</p>
 
   <h2>1. Informatii generale</h2>
-  <p>Acest site este operat de <strong>Latte Coffee SRL</strong>, cu sediul in Romania. Prin accesarea si utilizarea site-ului <strong>partners.latte.ro</strong>, acceptati acesti termeni si conditii.</p>
+  <p>Acest site este operat de <strong>Latte SRL</strong>, cu sediul in Romania. Prin accesarea si utilizarea site-ului <strong>partners.latte.ro</strong>, acceptati acesti termeni si conditii.</p>
 
   <h2>2. Scopul site-ului</h2>
   <p>Site-ul are ca scop prezentarea oportunitatii de franciza Latte si colectarea aplicatiilor de la persoanele interesate. Informatiile prezentate sunt cu caracter informativ si nu constituie o oferta ferma de vanzare.</p>
 
   <h2>3. Formularul de aplicare</h2>
-  <p>Completarea formularului de aplicare nu garanteaza acordarea unei francize. Toate aplicatiile sunt evaluate individual, iar Latte Coffee SRL isi rezerva dreptul de a accepta sau refuza orice candidatura.</p>
+  <p>Completarea formularului de aplicare nu garanteaza acordarea unei francize. Toate aplicatiile sunt evaluate individual, iar Latte SRL isi rezerva dreptul de a accepta sau refuza orice candidatura.</p>
 
   <h2>4. Proprietate intelectuala</h2>
-  <p>Toate elementele site-ului (texte, imagini, logo, design, cod sursa) sunt proprietatea Latte Coffee SRL sau sunt utilizate cu licenta. Reproducerea, copierea sau distribuirea acestora fara acord scris este interzisa.</p>
+  <p>Toate elementele site-ului (texte, imagini, logo, design, cod sursa) sunt proprietatea Latte SRL sau sunt utilizate cu licenta. Reproducerea, copierea sau distribuirea acestora fara acord scris este interzisa.</p>
 
   <h2>5. Informatii financiare</h2>
   <p>Cifrele prezentate pe site (costuri, estimari de profit, randament) sunt orientative si se bazeaza pe date medii din reteaua existenta. Rezultatele reale pot varia in functie de locatie, gestionare si alti factori.</p>
 
   <h2>6. Limitarea raspunderii</h2>
-  <p>Latte Coffee SRL nu garanteaza disponibilitatea neintrerupta a site-ului si nu raspunde pentru daune indirecte rezultate din utilizarea sau imposibilitatea utilizarii site-ului.</p>
+  <p>Latte SRL nu garanteaza disponibilitatea neintrerupta a site-ului si nu raspunde pentru daune indirecte rezultate din utilizarea sau imposibilitatea utilizarii site-ului.</p>
 
   <h2>7. Linkuri externe</h2>
   <p>Site-ul poate contine linkuri catre alte site-uri. Nu suntem responsabili pentru continutul sau politicile de confidentialitate ale site-urilor terte.</p>
@@ -132,11 +132,24 @@ footer { background: var(--ink); color: var(--offwhite); padding: 64px 0 32px; }
       </div>
     </div>
     <div class="foot-bot">
-      <span>&copy; 2026 Latte Coffee SRL</span>
+      <span>&copy; 2026 Latte SRL</span>
       <span style="font-family:'JetBrains Mono',monospace">// hai sa bem o cafea</span>
     </div>
   </div>
 </footer>
 
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(29,29,28,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:18px 28px;font-family:'Manrope',system-ui,sans-serif;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <p style="color:rgba(255,252,250,.8);font-size:14px;margin:0;line-height:1.5;max-width:720px;">Acest site foloseste cookie-uri tehnice strict necesare functionarii. Nu folosim cookie-uri de tracking sau publicitate. <a href="/landing/politica-confidentialitate.html" style="color:#52C4B6;text-decoration:underline;">Politica de confidentialitate</a></p>
+    <div style="display:flex;gap:10px;flex-shrink:0;">
+      <button onclick="acceptCookies()" style="font-family:inherit;font-size:14px;font-weight:600;padding:10px 24px;border-radius:999px;border:none;background:#52C4B6;color:#1D1D1C;cursor:pointer;">Accept</button>
+      <button onclick="acceptCookies()" style="font-family:inherit;font-size:14px;font-weight:500;padding:10px 24px;border-radius:999px;border:1px solid rgba(255,252,250,.3);background:transparent;color:rgba(255,252,250,.7);cursor:pointer;">Inchide</button>
+    </div>
+  </div>
+</div>
+<script>
+function acceptCookies(){document.getElementById('cookie-banner').style.display='none';localStorage.setItem('cookie_consent','1')}
+if(!localStorage.getItem('cookie_consent')){document.getElementById('cookie-banner').style.display='block'}
+</script>
 </body>
 </html>

@@ -537,7 +537,7 @@ function Footer() {
           ></iframe>
         </div>
         <div className="foot-bot">
-          <span>© 2026 Latte Coffee SRL · CUI RO12345678</span>
+          <span>© 2026 Latte SRL · CUI RO40412906</span>
           <span style={{ fontFamily: "JetBrains Mono" }}>// hai să bem o cafea</span>
         </div>
       </div>
