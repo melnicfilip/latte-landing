@@ -25,7 +25,7 @@ function Process() {
             <div className="step-card" key={s.n}>
               <div className="step-num">{s.n}</div>
               <div className="step-week">{s.w}</div>
-              <h4>{s.t}</h4>
+              <h3 className="step-title">{s.t}</h3>
               <ul>
                 {s.b.map((x, i) => <li key={i}>{x}</li>)}
               </ul>
@@ -220,7 +220,7 @@ function WhyNow() {
           <div className="why-card a">
             <div>
               <IcFlame size={36} color="#1D1D1C" />
-              <h4>Sezonul rece urcă vânzările</h4>
+              <h3 className="why-title">Sezonul rece urcă vânzările</h3>
               <p>Toamnă—iarnă—primăvară aduce <strong>+30—50%</strong> consum față de vară. Cine deschide acum prinde sezonul.</p>
             </div>
             <div className="why-num">+50%</div>
@@ -228,7 +228,7 @@ function WhyNow() {
           <div className="why-card b">
             <div>
               <IcMap size={36} color="#1D1D1C" />
-              <h4>Locațiile bune se ocupă zilnic</h4>
+              <h3 className="why-title">Locațiile bune se ocupă zilnic</h3>
               <p>Mall-urile, birourile noi, supermarketurile semnează cu primul venit. Concurența nu doarme.</p>
             </div>
             <div className="why-num">1/zi</div>
@@ -236,7 +236,7 @@ function WhyNow() {
           <div className="why-card c">
             <div>
               <IcChart size={36} color="#1D1D1C" />
-              <h4>Prețul aparatului crește</h4>
+              <h3 className="why-title">Prețul aparatului crește</h3>
               <p>Componentele se scumpesc, EURO-ul fluctuează. Investiția de azi se închide la <strong>3.000€</strong> — mâine, nu mai garantăm.</p>
             </div>
             <div className="why-num">2026</div>
@@ -458,8 +458,8 @@ function FinalCTA() {
                     <label htmlFor="tel">Număr de telefon {errors.tel && <span className="field-err">* obligatoriu</span>}</label>
                     <input id="tel" type="tel" value={form.tel} onChange={upd("tel")} placeholder="07XXXXXXXX" />
                   </div>
-                  <label style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13.5, color: "var(--mute)", marginTop: 8, cursor: "pointer", lineHeight: 1.45 }}>
-                    <input type="checkbox" checked={form.gdpr === "da"} onChange={() => setForm({ ...form, gdpr: form.gdpr === "da" ? "" : "da" })} style={{ marginTop: 3, accentColor: "var(--turq)" }} />
+                  <label htmlFor="gdpr-check" style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13.5, color: "var(--mute)", marginTop: 8, cursor: "pointer", lineHeight: 1.45 }}>
+                    <input id="gdpr-check" type="checkbox" checked={form.gdpr === "da"} onChange={() => setForm({ ...form, gdpr: form.gdpr === "da" ? "" : "da" })} style={{ marginTop: 3, accentColor: "var(--turq)" }} />
                     <span>Sunt de acord cu prelucrarea datelor personale conform <a href="/politica-confidentialitate" style={{ color: "var(--turq-deep)", textDecoration: "underline" }}>Politicii de confidențialitate</a>. {errors.gdpr && <span className="field-err">* obligatoriu</span>}</span>
                   </label>
                 </div>
@@ -521,13 +521,13 @@ function Footer() {
             </div>
           </div>
           <div className="foot-col">
-            <h5>Contact</h5>
+            <div className="foot-heading">Contact</div>
             <a href="https://wa.me/40725965987">WhatsApp +40 725 965 987</a>
             <a href="mailto:info@latte.ro">info@latte.ro</a>
             <a href="#aplica">Formular aplicare</a>
           </div>
           <div className="foot-col">
-            <h5>Pagina</h5>
+            <div className="foot-heading">Pagina</div>
             <a href="#concept">Despre Latte</a>
             <a href="#pret">Preț franciză</a>
             <a href="#calculator">Calculator profit</a>
@@ -535,7 +535,7 @@ function Footer() {
             <a href="/blog/">Blog</a>
           </div>
           <div className="foot-col">
-            <h5>Legal</h5>
+            <div className="foot-heading">Legal</div>
             <a href="/politica-confidentialitate">Politica de confidențialitate</a>
             <a href="/termeni-si-conditii">Termeni și condiții</a>
             <a href="https://anpc.ro/">ANPC — SAL / SOL</a>

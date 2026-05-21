@@ -220,22 +220,22 @@ function Calculator() {
         <div className="calc-grid">
           <div className="calc-card">
             <div className="slider-row">
-              <label>Pahare vândute / zi <span className="v">{cups}</span></label>
-              <input type="range" min="10" max="200" value={cups} onChange={e => setCups(+e.target.value)} />
+              <label htmlFor="calc-cups">Pahare vândute / zi <span className="v">{cups}</span></label>
+              <input id="calc-cups" type="range" min="10" max="200" value={cups} onChange={e => setCups(+e.target.value)} />
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--mute)", marginTop: 6 }}>
                 <span>10</span><span>50</span><span>100</span><span>200</span>
               </div>
             </div>
             <div className="slider-row">
-              <label>Preț mediu / pahar <span className="v">{price} lei</span></label>
-              <input type="range" min="5" max="8" step="0.1" value={price} onChange={e => setPrice(+e.target.value)} />
+              <label htmlFor="calc-price">Preț mediu / pahar <span className="v">{price} lei</span></label>
+              <input id="calc-price" type="range" min="5" max="8" step="0.1" value={price} onChange={e => setPrice(+e.target.value)} />
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--mute)", marginTop: 6 }}>
                 <span>5 lei</span><span>6.7 lei</span><span>8 lei</span>
               </div>
             </div>
             <div className="slider-row" style={{ marginBottom: 0 }}>
-              <label>Chirie locație / lună <span className="v">{rent}€</span></label>
-              <input type="range" min="0" max="500" step="25" value={rent} onChange={e => setRent(+e.target.value)} />
+              <label htmlFor="calc-rent">Chirie locație / lună <span className="v">{rent}€</span></label>
+              <input id="calc-rent" type="range" min="0" max="500" step="25" value={rent} onChange={e => setRent(+e.target.value)} />
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--mute)", marginTop: 6 }}>
                 <span>0€</span><span>150€</span><span>350€</span><span>500€</span>
               </div>

@@ -29,22 +29,24 @@ function App() {
     <>
       <Ticker />
       <Nav />
-      <Hero />
-      <Concept />
-      <Price />
-      <Anatomy />
-      <VsVending />
-      <Menu />
-      <Calculator />
-      <MidCTA text="Vrei să afli mai multe?" />
-      <Locations />
-      <Process />
-      <PhoneSection />
-      <Proof />
-      <MidCTA text="Începe cu prima ta locație." />
-      <WhyNow />
-      <FAQ />
-      <FinalCTA />
+      <main>
+        <Hero />
+        <Concept />
+        <Price />
+        <Anatomy />
+        <VsVending />
+        <Menu />
+        <Calculator />
+        <MidCTA text="Vrei să afli mai multe?" />
+        <Locations />
+        <Process />
+        <PhoneSection />
+        <Proof />
+        <MidCTA text="Începe cu prima ta locație." />
+        <WhyNow />
+        <FAQ />
+        <FinalCTA />
+      </main>
       <Footer />
     </>
   );
