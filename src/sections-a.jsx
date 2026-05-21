@@ -4,7 +4,7 @@ function Ticker() {
   const items = [
     "250+ cafenele active în România",
     "Lapte natural • Nu praf",
-    "18 rețete • Cafea 100% Arabica",
+    "18 rețete + 3 siropuri • Cafea 100% Arabica",
     "Brand românesc, fondat 2022",
     "Aplică pe WhatsApp în 24h",
     "129 orașe potrivite",

@@ -85,13 +85,13 @@ function VsVending() {
         <div className="vs-grid" style={{ marginTop: 48 }}>
           <div className="vs-col latte">
             <div style={{ fontFamily: "Bricolage Grotesque", fontSize: 14, letterSpacing: ".14em", textTransform: "uppercase", fontWeight: 700 }}>Latte</div>
-            <h3 className="display" style={{ marginTop: 8 }}>Cafenea în miniatură.</h3>
+            <h3 className="display" style={{ marginTop: 8 }}>Cafea de specialitate. La buton.</h3>
             <ul className="vs-list">
               {[
                 ["Lapte natural, păstrat la 4°C", "Beandrops — cafea 100% Arabica, prăjire premium"],
                 ["Design modern, brand recunoscut", "250+ aparate în lanț"],
                 ["Cantități mari: 200—300ml M / L", "Pahar gros, capac, agitator incluse"],
-                ["18 rețete + 5 siropuri + ciocolată", "Produs gourmet, nu instant"],
+                ["18 rețete + 3 siropuri + ciocolată", "Produs gourmet, nu instant"],
               ].map(([a,b], i) => (
                 <li key={i}><span className="check">✓</span><div><strong>{a}</strong><div style={{ fontSize: 13.5, color: "var(--ink-soft)", marginTop: 2 }}>{b}</div></div></li>
               ))}
@@ -100,7 +100,7 @@ function VsVending() {
 
           <div className="vs-col vend">
             <div style={{ fontFamily: "Bricolage Grotesque", fontSize: 14, letterSpacing: ".14em", textTransform: "uppercase", fontWeight: 700 }}>Vending obișnuit</div>
-            <h3 className="display" style={{ marginTop: 8, color: "#6B6B68" }}>Cafea ca să nu mori.</h3>
+            <h3 className="display" style={{ marginTop: 8, color: "#6B6B68" }}>Cafea din obișnuință.</h3>
             <ul className="vs-list">
               {[
                 ["Lapte praf, calitate scăzută", "Surogat ieftin, gust artificial"],
@@ -190,7 +190,7 @@ function Menu() {
 
 function Calculator() {
   const [cups, setCups] = React.useState(50);
-  const [price, setPrice] = React.useState(7);
+  const [price, setPrice] = React.useState(6.7);
   const [rent, setRent] = React.useState(150);
 
   const days = 30;
@@ -228,9 +228,9 @@ function Calculator() {
             </div>
             <div className="slider-row">
               <label>Preț mediu / pahar <span className="v">{price} lei</span></label>
-              <input type="range" min="4" max="12" step="0.5" value={price} onChange={e => setPrice(+e.target.value)} />
+              <input type="range" min="5" max="8" step="0.1" value={price} onChange={e => setPrice(+e.target.value)} />
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--mute)", marginTop: 6 }}>
-                <span>4 lei</span><span>7 lei</span><span>12 lei</span>
+                <span>5 lei</span><span>6.7 lei</span><span>8 lei</span>
               </div>
             </div>
             <div className="slider-row" style={{ marginBottom: 0 }}>
