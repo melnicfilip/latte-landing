@@ -96,6 +96,15 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
                 "form_name": "Formular Franciză Landing",
                 "form_page": page_url,
                 "form_sent_at": now,
+                "referer": data.get("referrer", ""),
+                "utm_source": utm_source,
+                "utm_medium": utm_medium,
+                "utm_campaign": utm_campaign,
+                "utm_content": utm_content,
+                "utm_term": utm_term,
+                "utm_referrer": data.get("referrer", ""),
+                "gclid": gclid,
+                "fbclid": fbclid,
             }
         }
 
@@ -111,24 +120,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
             lead_uid = unsorted[0].get("uid", "") if unsorted else ""
 
             if lead_uid:
-                lead_id = self._enrich_lead(lead_uid, data)
-
-                # Add UTM note to lead
-                if lead_id:
-                    utm_parts = []
-                    if utm_source: utm_parts.append(f"source: {utm_source}")
-                    if utm_medium: utm_parts.append(f"medium: {utm_medium}")
-                    if utm_campaign: utm_parts.append(f"campaign: {utm_campaign}")
-                    if utm_term: utm_parts.append(f"term: {utm_term}")
-                    if utm_content: utm_parts.append(f"content: {utm_content}")
-                    if gclid: utm_parts.append(f"gclid: {gclid}")
-                    if fbclid: utm_parts.append(f"fbclid: {fbclid}")
-                    if utm_parts:
-                        try:
-                            note_text = "UTM Tracking:\n" + "\n".join(utm_parts) + f"\nURL: {page_url}"
-                            self._kommo_post(f"/api/v4/leads/{lead_id}/notes", [{"note_type": "common", "params": {"text": note_text}}])
-                        except Exception as ne:
-                            print(f"[{datetime.now().isoformat()}] Note warning: {ne}", file=sys.stderr)
+                self._enrich_lead(lead_uid, data)
 
             self._brevo_sync(data, nome, email, tel, utm_source, utm_medium, utm_campaign)
 

@@ -336,7 +336,7 @@ function FinalCTA() {
     fetch("/api/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...form, ...utmData, page_url: window.location.href }),
+      body: JSON.stringify({ ...form, ...utmData, page_url: window.location.href, referrer: document.referrer }),
     })
       .then(r => r.json())
       .then(() => { window.location.href = "/success"; })
