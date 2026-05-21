@@ -23,34 +23,31 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
 <link rel="preload" as="image" href="/assets/logo.png" />
-<link rel="preload" as="image" href="/assets/aparat.png" />
+<link rel="preload" as="image" href="/assets/aparat.webp" />
 
-<!-- Google Analytics (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-64NHM99BZ4"></script>
+<!-- Tracking loaded after cookie consent -->
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-64NHM99BZ4');
+function loadTracking(){
+  if(window._trackingLoaded)return;
+  window._trackingLoaded=true;
+  // GA4
+  var gs=document.createElement('script');
+  gs.async=true;gs.src='https://www.googletagmanager.com/gtag/js?id=G-64NHM99BZ4';
+  document.head.appendChild(gs);
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag=gtag;
+  gtag('js',new Date());gtag('config','G-64NHM99BZ4');
+  // Meta Pixel
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1756577964676334');fbq('track','PageView');
+}
+if(localStorage.getItem('cookie_consent')==='accepted'){loadTracking();}
 </script>
-
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1756577964676334');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1756577964676334&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -605,15 +602,16 @@ footer { background: var(--ink); color: var(--offwhite); padding: 64px 0 32px; }
 
 <div id="consent-notice" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(29,29,28,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:18px 28px;font-family:'Manrope',system-ui,sans-serif;">
   <div style="max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
-    <p style="color:rgba(255,252,250,.8);font-size:14px;margin:0;line-height:1.5;max-width:720px;">Acest site foloseste cookie-uri tehnice strict necesare functionarii. Nu folosim cookie-uri de tracking sau publicitate. <a href="/politica-confidentialitate" style="color:#52C4B6;text-decoration:underline;">Politica de confidentialitate</a></p>
+    <p style="color:rgba(255,252,250,.8);font-size:14px;margin:0;line-height:1.5;max-width:720px;">Folosim cookie-uri pentru analiză și publicitate (Google Analytics, Meta Pixel). <a href="/politica-confidentialitate" style="color:#52C4B6;text-decoration:underline;">Politica de confidențialitate</a></p>
     <div style="display:flex;gap:10px;flex-shrink:0;">
       <button onclick="acceptCookies()" style="font-family:inherit;font-size:14px;font-weight:600;padding:10px 24px;border-radius:999px;border:none;background:#52C4B6;color:#1D1D1C;cursor:pointer;">Accept</button>
-      <button onclick="acceptCookies()" style="font-family:inherit;font-size:14px;font-weight:500;padding:10px 24px;border-radius:999px;border:1px solid rgba(255,252,250,.3);background:transparent;color:rgba(255,252,250,.7);cursor:pointer;">Inchide</button>
+      <button onclick="rejectCookies()" style="font-family:inherit;font-size:14px;font-weight:500;padding:10px 24px;border-radius:999px;border:1px solid rgba(255,252,250,.3);background:transparent;color:rgba(255,252,250,.7);cursor:pointer;">Refuz</button>
     </div>
   </div>
 </div>
 <script>
-function acceptCookies(){document.getElementById('consent-notice').style.display='none';localStorage.setItem('cookie_consent','1')}
+function acceptCookies(){document.getElementById('consent-notice').style.display='none';localStorage.setItem('cookie_consent','accepted');loadTracking();}
+function rejectCookies(){document.getElementById('consent-notice').style.display='none';localStorage.setItem('cookie_consent','rejected');}
 if(!localStorage.getItem('cookie_consent')){document.getElementById('consent-notice').style.display='block'}
 </script>
 </body>

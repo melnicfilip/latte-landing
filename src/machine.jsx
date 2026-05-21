@@ -3,7 +3,7 @@
 function Machine({ scale = 1 }) {
   return (
     <img
-      src="/assets/aparat.png"
+      src="/assets/aparat.webp"
       alt="Aparat Latte cu lapte natural"
       style={{
         display: "block",
