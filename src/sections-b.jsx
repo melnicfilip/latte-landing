@@ -11,7 +11,7 @@ function Anatomy() {
     { n: 6, x: "76%", y: "30%", t: "Touchscreen + 18 rețete", d: "Selecție rapidă, M și L, opțiuni de zahăr.", side:"R" },
     { n: 7, x: "76%", y: "52%", t: "POS bancă parteneră", d: "Card, contactless, Apple Pay & Google Pay.", side:"R" },
     { n: 8, x: "76%", y: "74%", t: "Fiscalizare ANAF", d: "Casa de marcat integrată. Bon la cerere.", side:"R" },
-    { n: 9, x: "30%", y: "92%", t: "Siropuri anti-vandalic", d: "5 arome, dispenser sigilat.", side:"B" },
+    { n: 9, x: "30%", y: "92%", t: "Siropuri anti-vandalic", d: "3 arome, dispenser sigilat.", side:"B" },
     { n: 10, x: "62%", y: "92%", t: "Organizator servețele", d: "Pahare M/L, capace, agitatoare.", side:"B" },
   ];
 

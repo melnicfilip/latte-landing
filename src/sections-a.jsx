@@ -146,6 +146,7 @@ function Price() {
     { n: "08", t: "Service & mentenanță", d: "Tehnicieni în toată țara. Diagnostic remote.", I: IcWrench },
     { n: "09", t: "Comunitate WhatsApp", d: "Acces la grupul partenerilor, sfaturi, locații.", I: IcWhats },
     { n: "10", t: "Ghid de locație", d: "Modelul nostru de evaluare locații + checklist.", I: IcDoc },
+    { n: "11", t: "Parteneriate cu lanțuri mari", d: "Acces la contractele existente cu rețele comerciale + viitoarele parteneriate.", I: IcShop },
   ];
   return (
     <section className="price-section" id="pret">
@@ -188,7 +189,7 @@ function Price() {
             </div>
           </div>
           <div style={{ fontSize: 14, color: "rgba(255,252,250,.65)", maxWidth: 360 }}>
-            Nu o ascundem. E parte din contract și acoperă platformă, brand, suport. Tot ce câștigi peste asta e al tău.
+            E parte din contract și acoperă platformă, brand, suport. Tot ce câștigi peste asta e al tău.
           </div>
         </div>
       </div>
