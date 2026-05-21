@@ -11,7 +11,9 @@ function App() {
       const el = document.querySelector(id);
       if (el) {
         e.preventDefault();
-        window.scrollTo({ top: el.offsetTop - 60, behavior: "smooth" });
+        requestAnimationFrame(() => {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
       }
     };
     document.addEventListener("click", onClick);

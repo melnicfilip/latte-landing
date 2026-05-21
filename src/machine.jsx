@@ -5,8 +5,8 @@ function Machine({ scale = 1 }) {
     <img
       src="/assets/aparat.webp"
       alt="Aparat Latte cu lapte natural"
-      width="460"
-      height="690"
+      width="650"
+      height="812"
       style={{
         display: "block",
         width: "100%",
