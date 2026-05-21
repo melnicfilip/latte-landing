@@ -28,7 +28,7 @@ function Nav() {
     href: "#top",
     className: "logo"
   }, /*#__PURE__*/React.createElement("img", {
-    src: "/assets/logo.png",
+    src: "/assets/logo.webp",
     alt: "latte",
     style: {
       height: 38,

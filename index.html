@@ -23,7 +23,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
-<link rel="preload" as="image" href="/assets/logo.png" />
+<link rel="preload" as="image" href="/assets/logo.webp" />
 <link rel="preload" as="image" href="/assets/aparat.webp" />
 
 <!-- Tracking loaded after cookie consent -->
@@ -54,10 +54,11 @@ if(localStorage.getItem('cookie_consent')==='accepted'){loadTracking();}
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FranchiseBusiness","name":"Latte","url":"https://latte.ro/","telephone":"+40725965987","email":"info@latte.ro","areaServed":"RO","description":"Franciză self-service de cafea cu lapte natural în România.","foundingDate":"2022","logo":"https://latte.ro/assets/logo.png","sameAs":["https://www.instagram.com/latte.romania","https://www.facebook.com/Latte.business"]}
+{"@context":"https://schema.org","@type":"FranchiseBusiness","name":"Latte","url":"https://latte.ro/","telephone":"+40725965987","email":"info@latte.ro","areaServed":"RO","description":"Franciză self-service de cafea cu lapte natural în România.","foundingDate":"2022","logo":"https://latte.ro/assets/logo.webp","sameAs":["https://www.instagram.com/latte.romania","https://www.facebook.com/Latte.business"]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"În cât timp îmi recuperez investiția?","acceptedAnswer":{"@type":"Answer","text":"Tipic în 2—5 luni, în funcție de locație și volum. La 50 pahare/zi în mediu, recuperarea e sub 4 luni."}},{"@type":"Question","name":"Cum caut locația — eu sau voi?","acceptedAnswer":{"@type":"Answer","text":"Tu cauți, noi validăm. Primești ghidul de evaluare și criteriile. Account managerul aprobă oricâte locații vrei să propui."}},{"@type":"Question","name":"Ce este de fapt inclus în 3.000€?","acceptedAnswer":{"@type":"Answer","text":"Aparatul Latte echipat (în comodat), brandul, livrarea + montajul, training, platforma, telemetria fiscalizată, 300 pahare materie primă, account manager dedicat și acces la comunitatea partenerilor."}},{"@type":"Question","name":"De unde cumpăr materia primă după primele 300 pahare?","acceptedAnswer":{"@type":"Answer","text":"De la noi, pe platformă. Prețuri negociate la volum mare — cafea Beandrops, lapte natural de la furnizor partener, siropuri și pahare branded."}},{"@type":"Question","name":"Ce fac dacă se defectează aparatul?","acceptedAnswer":{"@type":"Answer","text":"Diagnostic remote — 80% din probleme se rezolvă fără deplasare. Pentru rest, tehnicieni în toată țara cu intervenție în 24—48h."}},{"@type":"Question","name":"E franciză sau cumpăr aparatul?","acceptedAnswer":{"@type":"Answer","text":"E franciză. Aparatul rămâne al nostru, ție îți rămâne business-ul (locație, încasări, profit). Asta îți permite să intri cu 3.000€."}},{"@type":"Question","name":"Am nevoie de experiență în HoReCa?","acceptedAnswer":{"@type":"Answer","text":"Nu. Majoritatea partenerilor noștri lucrau în alte domenii — IT, vânzări, construcții, profesori. Training-ul nostru e de o zi."}},{"@type":"Question","name":"Câte ore îmi ia să mă ocup săptămânal?","acceptedAnswer":{"@type":"Answer","text":"În medie 3 ore / aparat / săptămână: încărcare consumabile, vidare numerar, curățenie. Restul rulează singur."}}]}
@@ -581,8 +582,8 @@ footer { background: var(--ink); color: var(--offwhite); padding: 64px 0 32px; }
 .sr { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 </style>
 
-<script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-<script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script defer src="/assets/react.min.js"></script>
+<script defer src="/assets/react-dom.min.js"></script>
 <script defer src="/dist/icons.js"></script>
 <script defer src="/dist/machine.js"></script>
 <script defer src="/dist/sections-a.js"></script>
@@ -594,7 +595,7 @@ footer { background: var(--ink); color: var(--offwhite); padding: 64px 0 32px; }
 <div id="root"></div>
 <noscript>
 <div style="max-width:720px;margin:60px auto;padding:0 28px;font-family:Manrope,system-ui,sans-serif;text-align:center">
-  <img src="/assets/logo.png" alt="Latte.ro" style="height:48px;margin-bottom:24px" />
+  <img src="/assets/logo.webp" alt="Latte.ro" style="height:48px;margin-bottom:24px" />
   <h1 style="font-size:32px;line-height:1.1;margin-bottom:16px">Franciz&#259; self-service de cafea cu lapte natural</h1>
   <p style="font-size:18px;color:#6B6B68;margin-bottom:24px">250+ loca&#539;ii &#238;n Rom&#226;nia. Investi&#539;ie de la 3.000&#8364;. Aparat &#238;n comodat, brand, training &#537;i platform&#259; incluse.</p>
   <a href="https://wa.me/40725965987" style="display:inline-block;padding:16px 32px;background:#1D1D1C;color:#FFFCFA;border-radius:999px;text-decoration:none;font-weight:600">Aplic&#259; pe WhatsApp &#8594;</a>
