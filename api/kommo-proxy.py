@@ -63,16 +63,6 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
         page_url = data.get("page_url", "https://latte.ro")
 
         tags = [{"name": "landing-page"}, {"name": "formular-franciza"}]
-        if utm_source:
-            tags.append({"name": f"utm:{utm_source}"})
-        if utm_medium:
-            tags.append({"name": f"med:{utm_medium}"})
-        if utm_campaign:
-            tags.append({"name": f"camp:{utm_campaign}"})
-        if gclid:
-            tags.append({"name": "google-ads"})
-        if fbclid:
-            tags.append({"name": "facebook-ads"})
 
         payload = {
             "source_name": "Landing Page",
@@ -206,7 +196,33 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
             return None
 
     def _add_utm_note(self, lead_id, utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, fbclid, page_url, referrer):
-        """Add a note with UTM tracking data to the lead."""
+        """Set native tracking data fields and add a note with UTM data."""
+        # Set native Kommo tracking data fields
+        tracking_map = {
+            861717: utm_source,       # utm_source
+            861713: utm_medium,       # utm_medium
+            861715: utm_campaign,     # utm_campaign
+            861711: utm_content,      # utm_content
+            861719: utm_term,         # utm_term
+            861743: gclid,            # gclid
+            861747: fbclid,           # fbclid
+            861725: referrer,         # referrer
+            861721: referrer,         # utm_referrer
+        }
+        tracking_fields = []
+        for field_id, val in tracking_map.items():
+            if val:
+                tracking_fields.append({"field_id": field_id, "values": [{"value": val}]})
+
+        if tracking_fields:
+            try:
+                patch = [{"id": lead_id, "custom_fields_values": tracking_fields}]
+                self._kommo_patch("/api/v4/leads", patch)
+                print(f"[{datetime.now().isoformat()}] Tracking data set on lead {lead_id}")
+            except Exception as e:
+                print(f"[{datetime.now().isoformat()}] Tracking data warning: {e}", file=sys.stderr)
+
+        # Also add a note for easy visibility
         lines = []
         if utm_source:
             lines.append(f"UTM Source: {utm_source}")
