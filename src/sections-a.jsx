@@ -25,7 +25,7 @@ function Nav() {
   return (
     <nav className="nav">
       <div className="wrap nav-inner">
-        <a href="#top" className="logo"><img src="/landing/assets/logo.png" alt="latte" style={{ height: 38, display: "block" }} /></a>
+        <a href="#top" className="logo"><img src="/assets/logo.png" alt="latte" style={{ height: 38, display: "block" }} /></a>
         <div className="nav-links">
           <a href="#concept">Concept</a>
           <a href="#pret">Preț</a>

@@ -322,14 +322,14 @@ function FinalCTA() {
     e.preventDefault();
     if (!validate()) return;
     setSending(true);
-    fetch("/landing/api/submit", {
+    fetch("/api/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     })
       .then(r => r.json())
-      .then(() => { window.location.href = "/landing/success.html"; })
-      .catch(() => { window.location.href = "/landing/success.html"; });
+      .then(() => { window.location.href = "/success.html"; })
+      .catch(() => { window.location.href = "/success.html"; });
   };
 
   const RadioGroup = ({ name, options, cols }) => (
@@ -449,7 +449,7 @@ function FinalCTA() {
                   </div>
                   <label style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13.5, color: "var(--mute)", marginTop: 8, cursor: "pointer", lineHeight: 1.45 }}>
                     <input type="checkbox" checked={form.gdpr === "da"} onChange={() => setForm({ ...form, gdpr: form.gdpr === "da" ? "" : "da" })} style={{ marginTop: 3, accentColor: "var(--turq)" }} />
-                    <span>Sunt de acord cu prelucrarea datelor personale conform <a href="/landing/politica-confidentialitate.html" style={{ color: "var(--turq-deep)", textDecoration: "underline" }}>Politicii de confidențialitate</a>. {errors.gdpr && <span className="field-err">* obligatoriu</span>}</span>
+                    <span>Sunt de acord cu prelucrarea datelor personale conform <a href="/politica-confidentialitate.html" style={{ color: "var(--turq-deep)", textDecoration: "underline" }}>Politicii de confidențialitate</a>. {errors.gdpr && <span className="field-err">* obligatoriu</span>}</span>
                   </label>
                 </div>
               )}
@@ -475,7 +475,7 @@ function FinalCTA() {
               </div>
 
               <div className="form-foot">
-                Datele tale nu sunt partajate cu terți. <a href="/landing/politica-confidentialitate.html" style={{ color: "var(--ink)", textDecoration: "underline" }}>Politica de confidențialitate</a>.
+                Datele tale nu sunt partajate cu terți. <a href="/politica-confidentialitate.html" style={{ color: "var(--ink)", textDecoration: "underline" }}>Politica de confidențialitate</a>.
               </div>
             </>
           )}
@@ -521,12 +521,12 @@ function Footer() {
             <a href="#pret">Preț franciză</a>
             <a href="#calculator">Calculator profit</a>
             <a href="#faq">Întrebări frecvente</a>
-            <a href="/landing/blog/">Blog</a>
+            <a href="/blog/">Blog</a>
           </div>
           <div className="foot-col">
             <h5>Legal</h5>
-            <a href="/landing/politica-confidentialitate.html">Politica de confidențialitate</a>
-            <a href="/landing/termeni-si-conditii.html">Termeni și condiții</a>
+            <a href="/politica-confidentialitate.html">Politica de confidențialitate</a>
+            <a href="/termeni-si-conditii.html">Termeni și condiții</a>
             <a href="https://anpc.ro/">ANPC — SAL / SOL</a>
           </div>
         </div>

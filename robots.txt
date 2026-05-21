@@ -1,6 +1,6 @@
 User-agent: *
-Allow: /landing/
-Disallow: /landing/api/
-Disallow: /landing/success.html
+Allow: /
+Disallow: /api/
+Disallow: /success.html
 
-Sitemap: https://partners.latte.ro/landing/sitemap.xml
+Sitemap: https://latte.ro/sitemap.xml

@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://partners.latte.ro/landing/</loc>
+    <loc>https://latte.ro/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://partners.latte.ro/landing/politica-confidentialitate.html</loc>
+    <loc>https://latte.ro/politica-confidentialitate.html</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://partners.latte.ro/landing/termeni-si-conditii.html</loc>
+    <loc>https://latte.ro/termeni-si-conditii.html</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://partners.latte.ro/landing/blog/</loc>
+    <loc>https://latte.ro/blog/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://partners.latte.ro/landing/blog/franciza-cafea-romania.html</loc>
+    <loc>https://latte.ro/blog/franciza-cafea-romania.html</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://partners.latte.ro/landing/blog/cat-costa-franciza-cafea.html</loc>
+    <loc>https://latte.ro/blog/cat-costa-franciza-cafea.html</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://partners.latte.ro/landing/blog/vending-vs-cafenea-self-service.html</loc>
+    <loc>https://latte.ro/blog/vending-vs-cafenea-self-service.html</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://partners.latte.ro/landing/blog/afacere-cafea-venit-pasiv.html</loc>
+    <loc>https://latte.ro/blog/afacere-cafea-venit-pasiv.html</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
