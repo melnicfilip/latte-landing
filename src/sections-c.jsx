@@ -328,8 +328,8 @@ function FinalCTA() {
       body: JSON.stringify(form),
     })
       .then(r => r.json())
-      .then(() => { window.location.href = "/success.html"; })
-      .catch(() => { window.location.href = "/success.html"; });
+      .then(() => { window.location.href = "/success"; })
+      .catch(() => { window.location.href = "/success"; });
   };
 
   const RadioGroup = ({ name, options, cols }) => (
@@ -449,7 +449,7 @@ function FinalCTA() {
                   </div>
                   <label style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13.5, color: "var(--mute)", marginTop: 8, cursor: "pointer", lineHeight: 1.45 }}>
                     <input type="checkbox" checked={form.gdpr === "da"} onChange={() => setForm({ ...form, gdpr: form.gdpr === "da" ? "" : "da" })} style={{ marginTop: 3, accentColor: "var(--turq)" }} />
-                    <span>Sunt de acord cu prelucrarea datelor personale conform <a href="/politica-confidentialitate.html" style={{ color: "var(--turq-deep)", textDecoration: "underline" }}>Politicii de confidențialitate</a>. {errors.gdpr && <span className="field-err">* obligatoriu</span>}</span>
+                    <span>Sunt de acord cu prelucrarea datelor personale conform <a href="/politica-confidentialitate" style={{ color: "var(--turq-deep)", textDecoration: "underline" }}>Politicii de confidențialitate</a>. {errors.gdpr && <span className="field-err">* obligatoriu</span>}</span>
                   </label>
                 </div>
               )}
@@ -475,7 +475,7 @@ function FinalCTA() {
               </div>
 
               <div className="form-foot">
-                Datele tale nu sunt partajate cu terți. <a href="/politica-confidentialitate.html" style={{ color: "var(--ink)", textDecoration: "underline" }}>Politica de confidențialitate</a>.
+                Datele tale nu sunt partajate cu terți. <a href="/politica-confidentialitate" style={{ color: "var(--ink)", textDecoration: "underline" }}>Politica de confidențialitate</a>.
               </div>
             </>
           )}
@@ -525,8 +525,8 @@ function Footer() {
           </div>
           <div className="foot-col">
             <h5>Legal</h5>
-            <a href="/politica-confidentialitate.html">Politica de confidențialitate</a>
-            <a href="/termeni-si-conditii.html">Termeni și condiții</a>
+            <a href="/politica-confidentialitate">Politica de confidențialitate</a>
+            <a href="/termeni-si-conditii">Termeni și condiții</a>
             <a href="https://anpc.ro/">ANPC — SAL / SOL</a>
           </div>
         </div>
