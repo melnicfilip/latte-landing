@@ -550,4 +550,15 @@ function Footer() {
   );
 }
 
-Object.assign(window, { Process, PhoneSection, Proof, WhyNow, FAQ, FinalCTA, Footer });
+function MidCTA({ text }) {
+  return (
+    <div style={{ textAlign: "center", padding: "48px 28px" }}>
+      <p style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontWeight: 700, fontSize: "clamp(20px, 3vw, 26px)", letterSpacing: "-0.02em", marginBottom: 18, color: "var(--ink)" }}>{text}</p>
+      <a href="#aplica" className="btn btn-primary" style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
+        Aplică acum <IcArrow size={18} className="btn-arrow" />
+      </a>
+    </div>
+  );
+}
+
+Object.assign(window, { Process, PhoneSection, Proof, WhyNow, FAQ, FinalCTA, Footer, MidCTA });
