@@ -1,2 +1,5 @@
 .DS_Store
 .omc/
+node_modules/
+package*.json
+assets/aparat-opt.png
