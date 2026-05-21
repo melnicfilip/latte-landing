@@ -59,8 +59,8 @@ function Anatomy() {
             <div style={{ fontSize: 13, color: "rgba(255,252,250,.55)" }}>pahare în dispenser</div>
           </div>
           <div>
-            <div className="num" style={{ fontSize: 56 }}>24/7</div>
-            <div style={{ fontSize: 13, color: "rgba(255,252,250,.55)" }}>diagnostic remote</div>
+            <div className="num" style={{ fontSize: 56 }}>remote</div>
+            <div style={{ fontSize: 13, color: "rgba(255,252,250,.55)" }}>diagnostic din birou</div>
           </div>
         </div>
       </div>
@@ -88,8 +88,8 @@ function VsVending() {
             <h3 className="display" style={{ marginTop: 8 }}>Cafenea în miniatură.</h3>
             <ul className="vs-list">
               {[
-                ["Lapte natural, păstrat la 4°C", "Dropshot — cafea 100% Arabica, prăjire premium"],
-                ["Design modern, brand recunoscut", "150+ aparate în lanț"],
+                ["Lapte natural, păstrat la 4°C", "Beandrops — cafea 100% Arabica, prăjire premium"],
+                ["Design modern, brand recunoscut", "250+ aparate în lanț"],
                 ["Cantități mari: 200—300ml M / L", "Pahar gros, capac, agitator incluse"],
                 ["18 rețete + 5 siropuri + ciocolată", "Produs gourmet, nu instant"],
               ].map(([a,b], i) => (
