@@ -16,7 +16,12 @@ BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
 
 class FormHandler(http.server.BaseHTTPRequestHandler):
     def _cors(self):
-        self.send_header("Access-Control-Allow-Origin", "https://partners.latte.ro")
+        origin = self.headers.get("Origin", "")
+        allowed = ("https://latte.ro", "https://www.latte.ro", "https://partners.latte.ro")
+        if origin in allowed:
+            self.send_header("Access-Control-Allow-Origin", origin)
+        else:
+            self.send_header("Access-Control-Allow-Origin", "https://latte.ro")
         self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
 
@@ -47,6 +52,28 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
 
         now = int(datetime.now().timestamp())
 
+        # Extract UTM params
+        utm_source = data.get("utm_source", "")
+        utm_medium = data.get("utm_medium", "")
+        utm_campaign = data.get("utm_campaign", "")
+        utm_term = data.get("utm_term", "")
+        utm_content = data.get("utm_content", "")
+        gclid = data.get("gclid", "")
+        fbclid = data.get("fbclid", "")
+        page_url = data.get("page_url", "https://latte.ro")
+
+        tags = [{"name": "landing-page"}, {"name": "formular-franciza"}]
+        if utm_source:
+            tags.append({"name": f"utm:{utm_source}"})
+        if utm_medium:
+            tags.append({"name": f"med:{utm_medium}"})
+        if utm_campaign:
+            tags.append({"name": f"camp:{utm_campaign}"})
+        if gclid:
+            tags.append({"name": "google-ads"})
+        if fbclid:
+            tags.append({"name": "facebook-ads"})
+
         payload = {
             "source_name": "Landing Page",
             "source_uid": "latte-landing-form",
@@ -55,7 +82,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
                 "leads": [{
                     "name": f"Franciză — {nome} — {oras}" if oras else f"Franciză — {nome}",
                     "_embedded": {
-                        "tags": [{"name": "landing-page"}, {"name": "formular-franciza"}]
+                        "tags": tags
                     }
                 }],
                 "contacts": [{
@@ -67,7 +94,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
                 "ip": self.client_address[0],
                 "form_id": "landing-franciza",
                 "form_name": "Formular Franciză Landing",
-                "form_page": "https://partners.latte.ro/landing",
+                "form_page": page_url,
                 "form_sent_at": now,
             }
         }
@@ -84,9 +111,26 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
             lead_uid = unsorted[0].get("uid", "") if unsorted else ""
 
             if lead_uid:
-                self._enrich_lead(lead_uid, data)
+                lead_id = self._enrich_lead(lead_uid, data)
 
-            self._brevo_sync(data, nome, email, tel)
+                # Add UTM note to lead
+                if lead_id:
+                    utm_parts = []
+                    if utm_source: utm_parts.append(f"source: {utm_source}")
+                    if utm_medium: utm_parts.append(f"medium: {utm_medium}")
+                    if utm_campaign: utm_parts.append(f"campaign: {utm_campaign}")
+                    if utm_term: utm_parts.append(f"term: {utm_term}")
+                    if utm_content: utm_parts.append(f"content: {utm_content}")
+                    if gclid: utm_parts.append(f"gclid: {gclid}")
+                    if fbclid: utm_parts.append(f"fbclid: {fbclid}")
+                    if utm_parts:
+                        try:
+                            note_text = "UTM Tracking:\n" + "\n".join(utm_parts) + f"\nURL: {page_url}"
+                            self._kommo_post(f"/api/v4/leads/{lead_id}/notes", [{"note_type": "common", "params": {"text": note_text}}])
+                        except Exception as ne:
+                            print(f"[{datetime.now().isoformat()}] Note warning: {ne}", file=sys.stderr)
+
+            self._brevo_sync(data, nome, email, tel, utm_source, utm_medium, utm_campaign)
 
             self._respond(200, {"ok": True, "uid": lead_uid})
             print(f"[{datetime.now().isoformat()}] Lead created: {nome} ({oras}) — uid={lead_uid}")
@@ -129,7 +173,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
             raise Exception(f"Kommo API PATCH {e.code}: {body}")
 
     def _enrich_lead(self, unsorted_uid, data):
-        """Accept the unsorted lead and fill custom fields."""
+        """Accept the unsorted lead and fill custom fields. Returns lead_id."""
         try:
             accept_payload = {
                 "user_id": 0,
@@ -144,7 +188,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
                     lead_id = leads[0].get("id")
 
             if not lead_id:
-                return
+                return None
 
             field_map = {
                 "ocupatie": 2927931,           # OCUPATIA_ACTUALA
@@ -169,10 +213,13 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
                 patch = [{"id": lead_id, "custom_fields_values": fields}]
                 self._kommo_patch("/api/v4/leads", patch)
 
+            return lead_id
+
         except Exception as e:
             print(f"[{datetime.now().isoformat()}] Enrich warning: {e}", file=sys.stderr)
+            return None
 
-    def _brevo_sync(self, data, name, email, tel):
+    def _brevo_sync(self, data, name, email, tel, utm_source="", utm_medium="", utm_campaign=""):
         """Add or update contact in Brevo list #2."""
         if not BREVO_API_KEY or not email:
             return
@@ -194,6 +241,9 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
                     "ASTEPTARI_PROFIT": data.get("asteptari_profit", ""),
                     "RECUPERARE_INVESTITIE": data.get("recuperare_investitie", ""),
                     "DE_UNDE_AI_AFLAT": data.get("sursa", ""),
+                    "UTM_SOURCE": utm_source,
+                    "UTM_MEDIUM": utm_medium,
+                    "UTM_CAMPAIGN": utm_campaign,
                 },
             }
             req = urllib.request.Request(

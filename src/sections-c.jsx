@@ -285,8 +285,19 @@ function FAQ() {
   );
 }
 
+function getUtmParams() {
+  const params = new URLSearchParams(window.location.search);
+  const utm = {};
+  ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "fbclid"].forEach(k => {
+    const v = params.get(k);
+    if (v) utm[k] = v;
+  });
+  return utm;
+}
+
 function FinalCTA() {
   const [step, setStep] = React.useState(1);
+  const [utmData] = React.useState(() => getUtmParams());
   const [form, setForm] = React.useState({
     ocupatie: "", domeniu: "", cunostinte_franciza: "",
     motiv: "", buget: "", oras: "",
@@ -325,7 +336,7 @@ function FinalCTA() {
     fetch("/api/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, ...utmData, page_url: window.location.href }),
     })
       .then(r => r.json())
       .then(() => { window.location.href = "/success"; })
