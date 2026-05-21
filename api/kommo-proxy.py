@@ -96,15 +96,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
                 "form_name": "Formular Franciză Landing",
                 "form_page": page_url,
                 "form_sent_at": now,
-                "referer": data.get("referrer", ""),
-                "utm_source": utm_source,
-                "utm_medium": utm_medium,
-                "utm_campaign": utm_campaign,
-                "utm_content": utm_content,
-                "utm_term": utm_term,
-                "utm_referrer": data.get("referrer", ""),
-                "gclid": gclid,
-                "fbclid": fbclid,
+                "referer": data.get("referrer", "") or page_url,
             }
         }
 
@@ -120,7 +112,9 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
             lead_uid = unsorted[0].get("uid", "") if unsorted else ""
 
             if lead_uid:
-                self._enrich_lead(lead_uid, data)
+                lead_id = self._enrich_lead(lead_uid, data)
+                if lead_id:
+                    self._add_utm_note(lead_id, utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, fbclid, page_url, data.get("referrer", ""))
 
             self._brevo_sync(data, nome, email, tel, utm_source, utm_medium, utm_campaign)
 
@@ -210,6 +204,39 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
         except Exception as e:
             print(f"[{datetime.now().isoformat()}] Enrich warning: {e}", file=sys.stderr)
             return None
+
+    def _add_utm_note(self, lead_id, utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, fbclid, page_url, referrer):
+        """Add a note with UTM tracking data to the lead."""
+        lines = []
+        if utm_source:
+            lines.append(f"UTM Source: {utm_source}")
+        if utm_medium:
+            lines.append(f"UTM Medium: {utm_medium}")
+        if utm_campaign:
+            lines.append(f"UTM Campaign: {utm_campaign}")
+        if utm_term:
+            lines.append(f"UTM Term: {utm_term}")
+        if utm_content:
+            lines.append(f"UTM Content: {utm_content}")
+        if gclid:
+            lines.append(f"GCLID: {gclid}")
+        if fbclid:
+            lines.append(f"FBCLID: {fbclid}")
+        if page_url:
+            lines.append(f"Page: {page_url}")
+        if referrer:
+            lines.append(f"Referrer: {referrer}")
+
+        if not lines:
+            return
+
+        text = "📊 Tracking Data\n" + "\n".join(lines)
+        try:
+            payload = [{"entity_id": lead_id, "lead_id": lead_id, "note_type": "common", "params": {"text": text}}]
+            self._kommo_post("/api/v4/leads/notes", payload)
+            print(f"[{datetime.now().isoformat()}] UTM note added to lead {lead_id}")
+        except Exception as e:
+            print(f"[{datetime.now().isoformat()}] UTM note warning: {e}", file=sys.stderr)
 
     def _brevo_sync(self, data, name, email, tel, utm_source="", utm_medium="", utm_campaign=""):
         """Add or update contact in Brevo list #2."""
