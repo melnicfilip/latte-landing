@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Politica de confidentialitate — Latte.ro</title>
-<meta name="description" content="Politica de confidențialitate Latte.ro — cum colectăm, prelucrăm și protejăm datele personale conform GDPR." />
+<title>Blog — Latte.ro | Franciza de cafea self-service</title>
+<meta name="description" content="Articole despre francize de cafea, vending self-service, costuri, profitabilitate si sfaturi pentru antreprenori." />
 <meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://partners.latte.ro/landing/politica-confidentialitate.html" />
-<meta property="og:title" content="Politica de confidentialitate — Latte.ro" />
-<meta property="og:description" content="Cum colectăm, prelucrăm și protejăm datele personale conform GDPR." />
-<meta property="og:url" content="https://partners.latte.ro/landing/politica-confidentialitate.html" />
+<link rel="canonical" href="https://partners.latte.ro/landing/blog/" />
+<meta property="og:title" content="Blog — Latte.ro" />
+<meta property="og:description" content="Articole despre francize de cafea, vending self-service si antreprenoriat." />
+<meta property="og:url" content="https://partners.latte.ro/landing/blog/" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="ro_RO" />
+<meta property="og:site_name" content="Latte.ro" />
 <link rel="icon" type="image/png" href="/landing/assets/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +21,8 @@
 :root {
   --turq: #52C4B6; --turq-deep: #2FA89A; --offwhite: #FFFCFA;
   --ink: #1D1D1C; --ink-soft: #2B2B29; --line: #1D1D1C14; --mute: #6B6B68;
-  --r-pill: 999px;
+  --r-card: 20px; --r-pill: 999px;
+  --shadow-1: 0 1px 2px rgba(29,29,28,.06), 0 12px 32px -16px rgba(29,29,28,.18);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Manrope', system-ui, sans-serif; font-size: 17px; line-height: 1.55; color: var(--ink); background: var(--offwhite); -webkit-font-smoothing: antialiased; }
@@ -31,19 +33,22 @@ a { color: inherit; }
 .nav { position: sticky; top: 0; z-index: 49; background: rgba(255,252,250,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
 .logo { font-family: 'Bricolage Grotesque'; font-weight: 800; font-size: 22px; letter-spacing: -0.04em; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
-.glow { display: inline-block; width: 9px; height: 9px; border-radius: 999px; background: var(--turq); box-shadow: 0 0 0 4px rgba(82,196,182,.18), 0 0 18px rgba(82,196,182,.7); }
 .nav-back { font-size: 14px; font-weight: 500; text-decoration: none; color: var(--mute); }
 .nav-back:hover { color: var(--ink); }
 
-.content { max-width: 780px; margin: 0 auto; padding: 64px 28px 96px; }
+.content { max-width: 860px; margin: 0 auto; padding: 64px 28px 96px; }
 @media (max-width: 720px) { .content { padding: 40px 20px 64px; } }
 .content h1 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; margin-bottom: 8px; }
-.content .sub { color: var(--mute); font-size: 14px; margin-bottom: 48px; }
-.content h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 1.2rem; margin-top: 40px; margin-bottom: 12px; color: var(--turq-deep); }
-.content p { color: var(--ink-soft); margin-bottom: 12px; }
-.content ul { padding-left: 20px; color: var(--ink-soft); margin-bottom: 12px; }
-.content li { margin-bottom: 6px; }
-.content a { color: var(--turq-deep); text-decoration: underline; }
+.content .sub { color: var(--mute); font-size: 15px; margin-bottom: 48px; max-width: 560px; }
+
+.articles { display: grid; gap: 28px; }
+.article-card { display: block; text-decoration: none; background: #fff; border: 1px solid var(--line); border-radius: var(--r-card); padding: 32px; transition: transform .15s ease, box-shadow .2s ease; }
+.article-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-1); }
+.article-card .tag { display: inline-block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--turq-deep); background: rgba(82,196,182,.1); padding: 4px 10px; border-radius: var(--r-pill); margin-bottom: 12px; }
+.article-card h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 1.3rem; letter-spacing: -0.01em; margin-bottom: 8px; }
+.article-card p { color: var(--ink-soft); font-size: 15px; line-height: 1.55; margin-bottom: 12px; }
+.article-card .meta { font-size: 13px; color: var(--mute); }
+.article-card .read-more { color: var(--turq-deep); font-weight: 600; font-size: 14px; }
 
 footer { background: var(--ink); color: var(--offwhite); padding: 64px 0 32px; }
 .foot-grid { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 48px; }
@@ -72,65 +77,40 @@ footer { background: var(--ink); color: var(--offwhite); padding: 64px 0 32px; }
 </nav>
 
 <div class="content">
-  <h1>Politica de confidentialitate</h1>
-  <p class="sub">Ultima actualizare: 20 mai 2026</p>
+  <h1>Blog Latte</h1>
+  <p class="sub">Ghiduri, compara&#539;ii &#537;i sfaturi pentru antreprenori care vor s&#259; intre &#238;n industria cafelei self-service.</p>
 
-  <h2>1. Operator de date</h2>
-  <p>Operatorul datelor cu caracter personal este <strong>Latte SRL</strong>, cu sediul in Romania, contact: <a href="mailto:info@latte.ro">info@latte.ro</a>.</p>
+  <div class="articles">
+    <a href="/landing/blog/franciza-cafea-romania.html" class="article-card">
+      <span class="tag">Ghid</span>
+      <h2>Cum s&#259; deschizi o franciz&#259; de cafea &#238;n Rom&#226;nia &#8212; Ghid complet 2026</h2>
+      <p>Tot ce trebuie s&#259; &#537;tii despre pa&#537;ii necesari, costurile implicate &#537;i cum s&#259; alegi franciza potrivit&#259; de cafea self-service.</p>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="meta">21 mai 2026 · 8 min citire</span>
+        <span class="read-more">Cite&#537;te &#8594;</span>
+      </div>
+    </a>
 
-  <h2>2. Date colectate</h2>
-  <p>Prin formularul de pe site colectam:</p>
-  <ul>
-    <li>Nume si prenume</li>
-    <li>Adresa de email</li>
-    <li>Numar de telefon</li>
-    <li>Oras</li>
-    <li>Informatii despre experienta profesionala si interesul pentru franciza (ocupatie, domeniu, buget, motivatie)</li>
-  </ul>
+    <a href="/landing/blog/cat-costa-franciza-cafea.html" class="article-card">
+      <span class="tag">Compara&#539;ie</span>
+      <h2>C&#226;t cost&#259; o franciz&#259; de cafea? Compara&#539;ie complet&#259; 2026</h2>
+      <p>Analiz&#259;m costurile reale ale francizelor de cafea din Rom&#226;nia: de la 3.000&#8364; la peste 100.000&#8364;. Ce prime&#537;ti la fiecare nivel de pre&#539;.</p>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="meta">&#206;n cur&#226;nd</span>
+        <span class="read-more" style="opacity:.4">&#206;n cur&#226;nd</span>
+      </div>
+    </a>
 
-  <h2>3. Scopul prelucrarii</h2>
-  <p>Datele sunt prelucrate in scopul:</p>
-  <ul>
-    <li>Evaluarii candidaturilor pentru franciza Latte</li>
-    <li>Contactarii candidatilor pentru discutii si prezentari</li>
-    <li>Trimiterii de informatii relevante despre oportunitatea de franciza</li>
-  </ul>
-
-  <h2>4. Temeiul juridic</h2>
-  <p>Prelucrarea se bazeaza pe consimtamantul dumneavoastra, acordat prin completarea si trimiterea formularului de aplicare (Art. 6 alin. 1 lit. a GDPR).</p>
-
-  <h2>5. Destinatari</h2>
-  <p>Datele pot fi transmise catre:</p>
-  <ul>
-    <li><strong>Kommo CRM</strong> — pentru gestionarea relatiei cu candidatii</li>
-    <li><strong>Brevo (Sendinblue)</strong> — pentru comunicari prin email</li>
-  </ul>
-  <p>Nu vindem si nu transmitem datele catre terti in scopuri de marketing.</p>
-
-  <h2>6. Durata stocarii</h2>
-  <p>Datele sunt pastrate pe durata procesului de evaluare si cel mult 2 ani de la ultima interactiune. Le puteti solicita stergerea oricand.</p>
-
-  <h2>7. Drepturile dumneavoastra</h2>
-  <p>Conform GDPR, aveti dreptul de:</p>
-  <ul>
-    <li>Acces la datele personale</li>
-    <li>Rectificare a datelor inexacte</li>
-    <li>Stergere a datelor („dreptul de a fi uitat")</li>
-    <li>Restrictionare a prelucrarii</li>
-    <li>Portabilitate a datelor</li>
-    <li>Opozitie la prelucrare</li>
-    <li>Retragere a consimtamantului in orice moment</li>
-  </ul>
-  <p>Pentru exercitarea acestor drepturi, contactati-ne la <a href="mailto:info@latte.ro">info@latte.ro</a>.</p>
-
-  <h2>8. Plangeri</h2>
-  <p>Daca considerati ca prelucrarea datelor incalca legislatia, aveti dreptul de a depune o plangere la <strong>Autoritatea Nationala de Supraveghere a Prelucrarii Datelor cu Caracter Personal (ANSPDCP)</strong> — <a href="https://www.dataprotection.ro">www.dataprotection.ro</a>.</p>
-
-  <h2>9. Cookie-uri</h2>
-  <p>Acest site nu foloseste cookie-uri de tracking sau publicitate. Se pot utiliza cookie-uri tehnice strict necesare functionarii site-ului.</p>
-
-  <h2>10. Modificari</h2>
-  <p>Ne rezervam dreptul de a actualiza aceasta politica. Versiunea curenta va fi mereu disponibila pe aceasta pagina.</p>
+    <a href="#" class="article-card" style="pointer-events:none;opacity:.7">
+      <span class="tag">Analiz&#259;</span>
+      <h2>Vending vs. cafenea self-service: Ce diferen&#539;e conteaz&#259;</h2>
+      <p>Compara&#539;ie obiectiv&#259; &#238;ntre un automat de cafea clasic &#537;i o cafenea self-service cu lapte natural.</p>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="meta">&#206;n cur&#226;nd</span>
+        <span class="read-more" style="opacity:.4">&#206;n cur&#226;nd</span>
+      </div>
+    </a>
+  </div>
 </div>
 
 <footer>
@@ -165,7 +145,7 @@ footer { background: var(--ink); color: var(--offwhite); padding: 64px 0 32px; }
       </div>
     </div>
     <div class="foot-bot">
-      <span>&copy; 2026 Latte SRL · CUI RO40412906</span>
+      <span>&copy; 2026 Latte SRL &middot; CUI RO40412906</span>
       <span style="font-family:'JetBrains Mono',monospace">// hai sa bem o cafea</span>
     </div>
   </div>

@@ -291,7 +291,7 @@ function FinalCTA() {
     ocupatie: "", domeniu: "", cunostinte_franciza: "",
     motiv: "", buget: "", oras: "",
     spatiu: "", asteptari_profit: "", recuperare_investitie: "", sursa: "",
-    nume: "", email: "", tel: "",
+    nume: "", email: "", tel: "", gdpr: "",
   });
   const [sent, setSent] = React.useState(false);
   const [sending, setSending] = React.useState(false);
@@ -304,7 +304,7 @@ function FinalCTA() {
     1: ["ocupatie", "domeniu", "cunostinte_franciza"],
     2: ["motiv", "buget", "oras"],
     3: ["spatiu", "asteptari_profit", "recuperare_investitie", "sursa"],
-    4: ["nume", "email", "tel"],
+    4: ["nume", "email", "tel", "gdpr"],
   };
 
   const validate = () => {
@@ -447,6 +447,10 @@ function FinalCTA() {
                     <label htmlFor="tel">Număr de telefon {errors.tel && <span className="field-err">* obligatoriu</span>}</label>
                     <input id="tel" type="tel" value={form.tel} onChange={upd("tel")} placeholder="07XXXXXXXX" />
                   </div>
+                  <label style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13.5, color: "var(--mute)", marginTop: 8, cursor: "pointer", lineHeight: 1.45 }}>
+                    <input type="checkbox" checked={form.gdpr === "da"} onChange={() => setForm({ ...form, gdpr: form.gdpr === "da" ? "" : "da" })} style={{ marginTop: 3, accentColor: "var(--turq)" }} />
+                    <span>Sunt de acord cu prelucrarea datelor personale conform <a href="/landing/politica-confidentialitate.html" style={{ color: "var(--turq-deep)", textDecoration: "underline" }}>Politicii de confidențialitate</a>. {errors.gdpr && <span className="field-err">* obligatoriu</span>}</span>
+                  </label>
                 </div>
               )}
 
@@ -517,6 +521,7 @@ function Footer() {
             <a href="#pret">Preț franciză</a>
             <a href="#calculator">Calculator profit</a>
             <a href="#faq">Întrebări frecvente</a>
+            <a href="/landing/blog/">Blog</a>
           </div>
           <div className="foot-col">
             <h5>Legal</h5>
