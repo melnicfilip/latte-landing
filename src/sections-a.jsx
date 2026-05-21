@@ -6,7 +6,7 @@ function Ticker() {
     "Lapte natural • Nu praf",
     "18 rețete + 3 siropuri • Cafea 100% Arabica",
     "Brand românesc, fondat 2022",
-    "Aplică pe WhatsApp în 24h",
+    "Fii propriul tău șef",
     "129 orașe potrivite",
   ];
   const all = [...items, ...items, ...items];
