@@ -318,11 +318,16 @@ function FinalCTA() {
     4: ["nume", "email", "tel", "gdpr"],
   };
 
-  const validate = () => {
+  const validate = (stepOverride) => {
+    const s = stepOverride || step;
     const errs = {};
-    (requiredByStep[step] || []).forEach(k => {
+    (requiredByStep[s] || []).forEach(k => {
       if (!form[k].trim()) errs[k] = true;
     });
+    if (s === 4) {
+      if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) errs.email = true;
+      if (form.tel && !/^[\d\s+()-]{7,15}$/.test(form.tel.trim())) errs.tel = true;
+    }
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -332,6 +337,8 @@ function FinalCTA() {
   const submit = (e) => {
     e.preventDefault();
     if (!validate()) return;
+    const contactMissing = !form.nume.trim() || !form.email.trim() || !form.tel.trim() || form.gdpr !== "da";
+    if (contactMissing) { setStep(4); setErrors({ nume: !form.nume.trim(), email: !form.email.trim(), tel: !form.tel.trim(), gdpr: form.gdpr !== "da" }); return; }
     setSending(true);
     fetch("/api/submit", {
       method: "POST",
@@ -448,15 +455,15 @@ function FinalCTA() {
                   </div>
                   <div className="field">
                     <label htmlFor="nume">Numele tău {errors.nume && <span className="field-err">* obligatoriu</span>}</label>
-                    <input id="nume" value={form.nume} onChange={upd("nume")} placeholder="Alex" />
+                    <input id="nume" value={form.nume} onChange={upd("nume")} placeholder="Alex" required />
                   </div>
                   <div className="field">
                     <label htmlFor="email">Email-ul tău {errors.email && <span className="field-err">* obligatoriu</span>}</label>
-                    <input id="email" type="email" value={form.email} onChange={upd("email")} placeholder="exemplu@gmail.com" />
+                    <input id="email" type="email" value={form.email} onChange={upd("email")} placeholder="exemplu@gmail.com" required />
                   </div>
                   <div className="field">
                     <label htmlFor="tel">Număr de telefon {errors.tel && <span className="field-err">* obligatoriu</span>}</label>
-                    <input id="tel" type="tel" value={form.tel} onChange={upd("tel")} placeholder="07XXXXXXXX" />
+                    <input id="tel" type="tel" value={form.tel} onChange={upd("tel")} placeholder="07XXXXXXXX" required />
                   </div>
                   <label htmlFor="gdpr-check" style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13.5, color: "var(--mute)", marginTop: 8, cursor: "pointer", lineHeight: 1.45 }}>
                     <input id="gdpr-check" type="checkbox" checked={form.gdpr === "da"} onChange={() => setForm({ ...form, gdpr: form.gdpr === "da" ? "" : "da" })} style={{ marginTop: 3, accentColor: "var(--turq)" }} />
