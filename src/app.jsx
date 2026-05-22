@@ -34,6 +34,7 @@ function App() {
       <main>
         <Hero />
         <Concept />
+        <LogoBar />
         <Price />
         <Anatomy />
         <VsVending />
@@ -44,6 +45,7 @@ function App() {
         <Process />
         <PhoneSection />
         <Proof />
+        <PartnerGallery />
         <MidCTA text="Începe cu prima ta locație." />
         <WhyNow />
         <FAQ />

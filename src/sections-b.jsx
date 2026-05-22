@@ -342,4 +342,80 @@ function Locations() {
   );
 }
 
-Object.assign(window, { Anatomy, VsVending, Menu, Calculator, Locations });
+function LogoBar() {
+  const logos = [
+    { src: "/assets/partners/carrefour.svg", alt: "Carrefour", h: 40 },
+    { src: "/assets/partners/banca-transilvania.svg", alt: "Banca Transilvania", h: 36 },
+    { src: "/assets/partners/auchan.webp", alt: "Auchan", h: 38 },
+    { src: "/assets/partners/dedeman.webp", alt: "Dedeman", h: 34 },
+    { src: "/assets/partners/selgros.webp", alt: "Selgros", h: 32 },
+    { src: "/assets/partners/medlife.webp", alt: "MedLife", h: 32 },
+    { src: "/assets/partners/kruk.webp", alt: "KRUK", h: 30 },
+  ];
+  return (
+    <section className="logo-bar">
+      <div className="wrap">
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <span className="eyebrow"><span className="dot"></span>Parteneri de incredere</span>
+          <h2 className="display" style={{ marginTop: 14, fontSize: "clamp(22px, 3vw, 30px)" }}>
+            Branduri care ne-au ales.
+          </h2>
+        </div>
+        <div className="logo-strip">
+          {logos.map((l, i) => (
+            <div className="logo-item" key={i}>
+              <img src={l.src} alt={l.alt} height={l.h} width="auto" loading="lazy" style={{ height: l.h, width: "auto", display: "block", objectFit: "contain" }} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PartnerGallery() {
+  const photos = [
+    { src: "/assets/partners/partner-7.webp", alt: "Partener Latte - cafenea self-service" },
+    { src: "/assets/partners/partner-2.webp", alt: "Partener Latte - locatie activa" },
+    { src: "/assets/partners/partner-3.webp", alt: "Partener Latte - cafenea in mall" },
+    { src: "/assets/partners/partner-4.webp", alt: "Partener Latte - magazin bricolaj" },
+    { src: "/assets/partners/partner-5.webp", alt: "Partener Latte - birou corporate" },
+    { src: "/assets/partners/partner-6.webp", alt: "Partener Latte - locatie stradala" },
+    { src: "/assets/partners/partner-8.webp", alt: "Partener Latte - supermarket" },
+    { src: "/assets/partners/partner-1.webp", alt: "Partener Latte - locatie activa" },
+  ];
+  const scrollRef = React.useRef(null);
+  const scroll = (dir) => {
+    if (scrollRef.current) {
+      const w = scrollRef.current.offsetWidth * 0.7;
+      scrollRef.current.scrollBy({ left: dir * w, behavior: "smooth" });
+    }
+  };
+  return (
+    <section className="partner-gallery">
+      <div className="wrap">
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16, marginBottom: 32 }}>
+          <div>
+            <span className="eyebrow"><span className="dot"></span>Partenerii nostri</span>
+            <h2 className="display" style={{ marginTop: 14, fontSize: "clamp(24px, 3vw, 32px)" }}>
+              Oameni reali. Locatii reale.
+            </h2>
+          </div>
+          <div className="gallery-arrows">
+            <button className="gallery-arrow" onClick={() => scroll(-1)} aria-label="Anterior">&#8592;</button>
+            <button className="gallery-arrow" onClick={() => scroll(1)} aria-label="Urmator">&#8594;</button>
+          </div>
+        </div>
+        <div className="gallery-track" ref={scrollRef}>
+          {photos.map((p, i) => (
+            <div className="gallery-card" key={i}>
+              <img src={p.src} alt={p.alt} width="280" height="374" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { Anatomy, VsVending, Menu, Calculator, Locations, LogoBar, PartnerGallery });
