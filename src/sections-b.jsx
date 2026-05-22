@@ -344,13 +344,13 @@ function Locations() {
 
 function LogoBar() {
   const logos = [
-    { src: "/assets/partners/carrefour.svg", alt: "Carrefour", h: 44 },
-    { src: "/assets/partners/banca-transilvania.svg", alt: "Banca Transilvania", h: 60 },
+    { src: "/assets/partners/carrefour.webp", alt: "Carrefour", h: 48 },
+    { src: "/assets/partners/banca-transilvania.webp", alt: "Banca Transilvania", h: 48 },
     { src: "/assets/partners/auchan.webp", alt: "Auchan", h: 48 },
-    { src: "/assets/partners/dedeman.webp", alt: "Dedeman", h: 44 },
-    { src: "/assets/partners/selgros.webp", alt: "Selgros", h: 40 },
-    { src: "/assets/partners/medlife.webp", alt: "MedLife", h: 40 },
-    { src: "/assets/partners/kruk.webp", alt: "KRUK", h: 38 },
+    { src: "/assets/partners/dedeman.webp", alt: "Dedeman", h: 48 },
+    { src: "/assets/partners/selgros.webp", alt: "Selgros", h: 48 },
+    { src: "/assets/partners/medlife.webp", alt: "MedLife", h: 48 },
+    { src: "/assets/partners/kruk.webp", alt: "KRUK", h: 48 },
   ];
   return (
     <section className="logo-bar">
