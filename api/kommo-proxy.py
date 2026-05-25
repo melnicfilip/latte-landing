@@ -2,6 +2,7 @@
 """Tiny HTTP server that receives landing form submissions and creates leads in Kommo CRM."""
 
 import json
+import hashlib
 import http.server
 import urllib.request
 import urllib.error
@@ -13,6 +14,8 @@ PORT = 4500
 KOMMO_API = "https://lattero.kommo.com"
 KOMMO_TOKEN = os.environ.get("KOMMO_TOKEN", "")
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
+FB_PIXEL_ID = "1756577964676334"
+FB_CAPI_TOKEN = os.environ.get("FB_CAPI_TOKEN", "")
 
 class FormHandler(http.server.BaseHTTPRequestHandler):
     def _cors(self):
@@ -107,6 +110,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
                     self._add_utm_note(lead_id, utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, fbclid, page_url, data.get("referrer", ""))
 
             self._brevo_sync(data, nome, email, tel, utm_source, utm_medium, utm_campaign)
+            self._fb_capi_send("Lead", data)
 
             self._respond(200, {"ok": True, "uid": lead_uid})
             print(f"[{datetime.now().isoformat()}] Lead created: {nome} ({oras}) — uid={lead_uid}")
@@ -304,6 +308,57 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
         self.send_header("Content-Type", "application/json")
         self.end_headers()
         self.wfile.write(json.dumps(data).encode())
+
+    def _fb_capi_send(self, event_name, data):
+        """Send server-side event to Facebook Conversions API."""
+        if not FB_CAPI_TOKEN:
+            return
+        try:
+            def sha256(val):
+                return hashlib.sha256(val.strip().lower().encode()).hexdigest() if val else None
+
+            user_data = {}
+            if data.get("email"):
+                user_data["em"] = [sha256(data["email"])]
+            if data.get("tel"):
+                phone = data["tel"].strip().replace(" ", "")
+                if not phone.startswith("+"):
+                    phone = "+40" + phone.lstrip("0")
+                user_data["ph"] = [hashlib.sha256(phone.encode()).hexdigest()]
+            if data.get("nume"):
+                parts = data["nume"].strip().split()
+                if parts:
+                    user_data["fn"] = [sha256(parts[0])]
+                    if len(parts) > 1:
+                        user_data["ln"] = [sha256(parts[-1])]
+            if data.get("oras"):
+                user_data["ct"] = [sha256(data["oras"])]
+            user_data["country"] = [sha256("ro")]
+
+            if data.get("fbclid"):
+                user_data["fbc"] = f"fb.1.{int(datetime.now().timestamp())}.{data['fbclid']}"
+            if data.get("_fbp"):
+                user_data["fbp"] = data["_fbp"]
+
+            user_data["client_ip_address"] = self.client_address[0]
+            user_data["client_user_agent"] = self.headers.get("User-Agent", "")
+
+            event = {
+                "event_name": event_name,
+                "event_time": int(datetime.now().timestamp()),
+                "event_source_url": data.get("page_url", "https://latte.ro"),
+                "action_source": "website",
+                "user_data": user_data,
+            }
+
+            payload = json.dumps({"data": [event]}).encode()
+            url = f"https://graph.facebook.com/v21.0/{FB_PIXEL_ID}/events?access_token={FB_CAPI_TOKEN}"
+            req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                result = json.loads(resp.read())
+            print(f"[{datetime.now().isoformat()}] FB CAPI {event_name}: {result}")
+        except Exception as e:
+            print(f"[{datetime.now().isoformat()}] FB CAPI error: {e}", file=sys.stderr)
 
     def log_message(self, fmt, *args):
         print(f"[{datetime.now().isoformat()}] {fmt % args}")
