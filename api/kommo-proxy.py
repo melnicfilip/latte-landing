@@ -16,6 +16,10 @@ KOMMO_TOKEN = os.environ.get("KOMMO_TOKEN", "")
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
 FB_PIXEL_ID = "1756577964676334"
 FB_CAPI_TOKEN = os.environ.get("FB_CAPI_TOKEN", "")
+TT_PIXEL_ID = "CU78K8JC77UDT30C56HG"
+TT_EVENTS_TOKEN = os.environ.get("TT_EVENTS_TOKEN", "")
+GA4_MEASUREMENT_ID = "G-64NHM99BZ4"
+GA4_API_SECRET = os.environ.get("GA4_API_SECRET", "")
 
 class FormHandler(http.server.BaseHTTPRequestHandler):
     def _cors(self):
@@ -111,6 +115,8 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
 
             self._brevo_sync(data, nome, email, tel, utm_source, utm_medium, utm_campaign)
             self._fb_capi_send("Lead", data)
+            self._tt_events_send("SubmitForm", data)
+            self._ga4_mp_send("generate_lead", data)
 
             self._respond(200, {"ok": True, "uid": lead_uid})
             print(f"[{datetime.now().isoformat()}] Lead created: {nome} ({oras}) — uid={lead_uid}")
@@ -359,6 +365,74 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
             print(f"[{datetime.now().isoformat()}] FB CAPI {event_name}: {result}")
         except Exception as e:
             print(f"[{datetime.now().isoformat()}] FB CAPI error: {e}", file=sys.stderr)
+
+    def _tt_events_send(self, event_name, data):
+        """Send server-side event to TikTok Events API."""
+        if not TT_EVENTS_TOKEN:
+            return
+        try:
+            def sha256(val):
+                return hashlib.sha256(val.strip().lower().encode()).hexdigest() if val else None
+
+            user = {}
+            if data.get("email"):
+                user["email"] = sha256(data["email"])
+            if data.get("tel"):
+                phone = data["tel"].strip().replace(" ", "")
+                if not phone.startswith("+"):
+                    phone = "+40" + phone.lstrip("0")
+                user["phone"] = hashlib.sha256(phone.encode()).hexdigest()
+            user["ip"] = self.client_address[0]
+            user["user_agent"] = self.headers.get("User-Agent", "")
+
+            event = {
+                "event": event_name,
+                "event_time": int(datetime.now().timestamp()),
+                "page": {"url": data.get("page_url", "https://latte.ro")},
+                "user": user,
+            }
+
+            payload = json.dumps({"pixel_code": TT_PIXEL_ID, "data": [event]}).encode()
+            url = "https://business-api.tiktok.com/open_api/v1.3/event/track/"
+            req = urllib.request.Request(url, data=payload, headers={
+                "Content-Type": "application/json",
+                "Access-Token": TT_EVENTS_TOKEN,
+            })
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                result = json.loads(resp.read())
+            print(f"[{datetime.now().isoformat()}] TT Events {event_name}: code={result.get('code')} msg={result.get('message')}")
+        except Exception as e:
+            print(f"[{datetime.now().isoformat()}] TT Events error: {e}", file=sys.stderr)
+
+    def _ga4_mp_send(self, event_name, data):
+        """Send server-side event to GA4 Measurement Protocol."""
+        if not GA4_API_SECRET:
+            return
+        try:
+            import uuid
+            client_id = data.get("_ga_cid", str(uuid.uuid4()))
+
+            event = {"name": event_name, "params": {
+                "event_category": "form",
+                "event_label": "franciza",
+            }}
+            if data.get("oras"):
+                event["params"]["city"] = data["oras"]
+            if data.get("utm_source"):
+                event["params"]["source"] = data["utm_source"]
+            if data.get("utm_medium"):
+                event["params"]["medium"] = data["utm_medium"]
+            if data.get("utm_campaign"):
+                event["params"]["campaign"] = data["utm_campaign"]
+
+            payload = json.dumps({"client_id": client_id, "events": [event]}).encode()
+            url = f"https://www.google-analytics.com/mp/collect?measurement_id={GA4_MEASUREMENT_ID}&api_secret={GA4_API_SECRET}"
+            req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                resp.read()
+            print(f"[{datetime.now().isoformat()}] GA4 MP {event_name}: sent (client_id={client_id[:12]}...)")
+        except Exception as e:
+            print(f"[{datetime.now().isoformat()}] GA4 MP error: {e}", file=sys.stderr)
 
     def log_message(self, fmt, *args):
         print(f"[{datetime.now().isoformat()}] {fmt % args}")
