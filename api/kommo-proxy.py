@@ -401,6 +401,9 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
             with urllib.request.urlopen(req, timeout=10) as resp:
                 result = json.loads(resp.read())
             print(f"[{datetime.now().isoformat()}] TT Events {event_name}: code={result.get('code')} msg={result.get('message')}")
+        except urllib.error.HTTPError as e:
+            body = e.read().decode()
+            print(f"[{datetime.now().isoformat()}] TT Events error: {e.code} {body}", file=sys.stderr)
         except Exception as e:
             print(f"[{datetime.now().isoformat()}] TT Events error: {e}", file=sys.stderr)
 
