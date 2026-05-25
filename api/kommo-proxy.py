@@ -392,7 +392,7 @@ class FormHandler(http.server.BaseHTTPRequestHandler):
                 "user": user,
             }
 
-            payload = json.dumps({"pixel_code": TT_PIXEL_ID, "data": [event]}).encode()
+            payload = json.dumps({"event_source": "web", "event_source_id": TT_PIXEL_ID, "data": [event]}).encode()
             url = "https://business-api.tiktok.com/open_api/v1.3/event/track/"
             req = urllib.request.Request(url, data=payload, headers={
                 "Content-Type": "application/json",
