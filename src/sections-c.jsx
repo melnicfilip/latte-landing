@@ -124,11 +124,11 @@ function PhoneSection() {
 function Proof() {
   // Top 10 partner cafés — April 2026 (anonymized location types)
   const cards = [
-    { rank: "01", type: "Locație stradală standalone", city: "București", cups: "3.348 / lună · ~112 / zi", revenue: "22.805", barFill: 99, spotlight: true },
+    { rank: "01", type: "Magazin", city: "București", cups: "3.348 / lună · ~112 / zi", revenue: "22.805", barFill: 99, spotlight: true },
     { rank: "02", type: "Spital județean", city: "Arad", cups: "3.367 / lună · ~112 / zi", revenue: "21.479", barFill: 94, accent: "#FFB878" },
     { rank: "03", type: "Magazin de bricolaj", city: "București · Băneasa", cups: "2.610 / lună · ~87 / zi", revenue: "17.347", barFill: 76, accent: "#FFFC9C" },
     { rank: "04", type: "Magazin de bricolaj", city: "Iași", cups: "2.636 / lună · ~88 / zi", revenue: "17.105", barFill: 75, accent: "#FFFC9C" },
-    { rank: "05", type: "Locație stradală standalone", city: "București", cups: "2.451 / lună · ~82 / zi", revenue: "16.577", barFill: 73, accent: "#52C4B6" },
+    { rank: "05", type: "Magazin", city: "București", cups: "2.451 / lună · ~82 / zi", revenue: "16.577", barFill: 73, accent: "#52C4B6" },
     { rank: "06", type: "Magazin de bricolaj", city: "Giurgiu", cups: "2.498 / lună · ~83 / zi", revenue: "16.382", barFill: 72, accent: "#FFFC9C" },
     { rank: "07", type: "Magazin non-stop de cartier", city: "Nereju", cups: "2.559 / lună · ~85 / zi", revenue: "16.008", barFill: 70, accent: "#A57BD3" },
     { rank: "08", type: "Magazin de bricolaj", city: "București · V. Cascadelor", cups: "2.409 / lună · ~80 / zi", revenue: "15.442", barFill: 68, accent: "#FFFC9C" },
