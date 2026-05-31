@@ -42,12 +42,12 @@ Latte oferă francize de cafenele self-service cu investiție inițială de la 3
 
 - Pagina principală: https://latte.ro
 - Blog: https://latte.ro/blog/
-- Cum să deschizi o franciză de cafea: https://latte.ro/blog/franciza-cafea-romania
-- Cât costă o franciză de cafea: https://latte.ro/blog/cat-costa-franciza-cafea
-- Vending vs cafenea self-service: https://latte.ro/blog/vending-vs-cafenea-self-service
-- Afacere cafea venit pasiv: https://latte.ro/blog/afacere-cafea-venit-pasiv
-- Politica de confidențialitate: https://latte.ro/politica-confidentialitate
-- Termeni și condiții: https://latte.ro/termeni-si-conditii
+- Cum să deschizi o franciză de cafea: https://latte.ro/blog/franciza-cafea-romania.html
+- Cât costă o franciză de cafea: https://latte.ro/blog/cat-costa-franciza-cafea.html
+- Vending vs cafenea self-service: https://latte.ro/blog/vending-vs-cafenea-self-service.html
+- Afacere cafea venit pasiv: https://latte.ro/blog/afacere-cafea-venit-pasiv.html
+- Politica de confidențialitate: https://latte.ro/politica-confidentialitate.html
+- Termeni și condiții: https://latte.ro/termeni-si-conditii.html
 
 ## Social media
 
