@@ -112,19 +112,19 @@ function Concept() {
           </h3>
           <div className="market-grid">
             <div className="stat-card yellow">
-              <div className="big-num" style={{ fontSize: 64 }}>300<span style={{ fontSize: 32 }}>M€</span></div>
+              <div className="big-num" style={{ fontSize: "clamp(40px,12vw,64px)" }}>300<span style={{ fontSize: "0.5em" }}>M€</span></div>
               <div className="stat-label">piață anuală în România</div>
             </div>
             <div className="stat-card">
-              <div className="big-num" style={{ fontSize: 64 }}>85%</div>
+              <div className="big-num" style={{ fontSize: "clamp(40px,12vw,64px)" }}>85%</div>
               <div className="stat-label">consum acasă sau la automat</div>
             </div>
             <div className="stat-card">
-              <div className="big-num" style={{ fontSize: 64 }}>2,4<span style={{ fontSize: 32 }}>kg</span></div>
+              <div className="big-num" style={{ fontSize: "clamp(40px,12vw,64px)" }}>2,4<span style={{ fontSize: "0.5em" }}>kg</span></div>
               <div className="stat-label">cafea / persoană / an</div>
             </div>
             <div className="stat-card" style={{ background: "#1D1D1C", color: "#FFFCFA", borderColor: "transparent" }}>
-              <div className="big-num" style={{ fontSize: 64, color: "#52C4B6" }}>+12%</div>
+              <div className="big-num" style={{ fontSize: "clamp(40px,12vw,64px)", color: "#52C4B6" }}>+12%</div>
               <div className="stat-label" style={{ color: "rgba(255,252,250,.6)" }}>creștere consum / an</div>
             </div>
           </div>

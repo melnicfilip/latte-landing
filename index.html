@@ -234,7 +234,8 @@ h3.display { font-size: clamp(24px, 3vw, 36px); margin: 0; }
 @media (max-width: 880px) { .split { grid-template-columns: 1fr; gap: 40px; } }
 .big-num { font-family: 'Bricolage Grotesque'; font-weight: 800; font-size: clamp(72px, 10vw, 144px); line-height: 0.9; letter-spacing: -0.05em; }
 .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
-.stat-card { padding: 28px; border-radius: var(--r-card); border: 1px solid var(--line); background: var(--offwhite); }
+.stat-card { padding: 28px; border-radius: var(--r-card); border: 1px solid var(--line); background: var(--offwhite); min-width: 0; }
+@media (max-width: 560px) { .market-grid { gap: 14px; } .stat-card { padding: 20px; } }
 .stat-card.yellow { background: var(--yellow); border-color: transparent; }
 .stat-label { font-size: 13px; font-weight: 500; color: var(--mute); margin-top: 8px; }
 
