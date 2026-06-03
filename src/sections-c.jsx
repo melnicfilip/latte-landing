@@ -178,7 +178,7 @@ function Proof() {
             ) : (
               <div key={i} className="proof-card">
                 <div className="proof-loc">
-                  <div className="avatar" style={{ background: c.accent || "#52C4B6", color: "#1D1D1C", fontSize: 18 }}>☕</div>
+                  <div className="avatar" style={{ background: c.accent || "#52C4B6" }}></div>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: 16, lineHeight: 1.25 }}>{c.type}</div>
                     <div className="meta" style={{ marginTop: 2 }}>{c.city}</div>
