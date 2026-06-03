@@ -122,36 +122,36 @@ function PhoneSection() {
 }
 
 function Proof() {
-  // Top 10 partner cafés — April 2026 (anonymized location types)
+  // Random selection of active partner cafés — April 2026 (anonymized location types)
   const cards = [
-    { rank: "01", type: "Magazin", city: "București", cups: "3.348 / lună · ~112 / zi", revenue: "22.805", barFill: 99, spotlight: true },
-    { rank: "02", type: "Spital județean", city: "Arad", cups: "3.367 / lună · ~112 / zi", revenue: "21.479", barFill: 94, accent: "#FFB878" },
-    { rank: "03", type: "Magazin de bricolaj", city: "București · Băneasa", cups: "2.610 / lună · ~87 / zi", revenue: "17.347", barFill: 76, accent: "#FFFC9C" },
-    { rank: "04", type: "Magazin de bricolaj", city: "Iași", cups: "2.636 / lună · ~88 / zi", revenue: "17.105", barFill: 75, accent: "#FFFC9C" },
-    { rank: "05", type: "Magazin", city: "București", cups: "2.451 / lună · ~82 / zi", revenue: "16.577", barFill: 73, accent: "#52C4B6" },
-    { rank: "06", type: "Magazin de bricolaj", city: "Giurgiu", cups: "2.498 / lună · ~83 / zi", revenue: "16.382", barFill: 72, accent: "#FFFC9C" },
-    { rank: "07", type: "Magazin non-stop de cartier", city: "Nereju", cups: "2.559 / lună · ~85 / zi", revenue: "16.008", barFill: 70, accent: "#A57BD3" },
-    { rank: "08", type: "Magazin de bricolaj", city: "București · V. Cascadelor", cups: "2.409 / lună · ~80 / zi", revenue: "15.442", barFill: 68, accent: "#FFFC9C" },
-    { rank: "09", type: "Spital județean", city: "Pitești", cups: "2.214 / lună · ~74 / zi", revenue: "14.540", barFill: 64, accent: "#FFB878" },
-    { rank: "10", type: "Magazin de bricolaj", city: "Iași", cups: "2.204 / lună · ~73 / zi", revenue: "14.122", barFill: 62, accent: "#FFFC9C" },
+    { type: "Magazin", city: "București", cups: "2.451 / lună · ~82 / zi", revenue: "16.577", barFill: 73, accent: "#52C4B6" },
+    { type: "Spital județean", city: "Pitești", cups: "2.214 / lună · ~74 / zi", revenue: "14.540", barFill: 64, accent: "#FFB878" },
+    { type: "Magazin de bricolaj", city: "București · Băneasa", cups: "2.610 / lună · ~87 / zi", revenue: "17.347", barFill: 76, accent: "#FFFC9C" },
+    { type: "Magazin non-stop de cartier", city: "Nereju", cups: "2.559 / lună · ~85 / zi", revenue: "16.008", barFill: 70, accent: "#A57BD3" },
+    { type: "Spital județean", city: "Arad", cups: "3.367 / lună · ~112 / zi", revenue: "21.479", barFill: 94, accent: "#FFB878" },
+    { type: "Magazin de bricolaj", city: "Iași", cups: "2.204 / lună · ~73 / zi", revenue: "14.122", barFill: 62, accent: "#FFFC9C" },
+    { type: "Magazin", city: "București", cups: "3.348 / lună · ~112 / zi", revenue: "22.805", barFill: 99, accent: "#52C4B6" },
+    { type: "Magazin de bricolaj", city: "Giurgiu", cups: "2.498 / lună · ~83 / zi", revenue: "16.382", barFill: 72, accent: "#FFFC9C" },
+    { type: "Magazin de bricolaj", city: "București · V. Cascadelor", cups: "2.409 / lună · ~80 / zi", revenue: "15.442", barFill: 68, accent: "#FFFC9C" },
+    { type: "Magazin de bricolaj", city: "Iași", cups: "2.636 / lună · ~88 / zi", revenue: "17.105", barFill: 75, accent: "#FFFC9C" },
   ];
   return (
     <section id="rezultate">
       <div className="wrap">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 32, flexWrap: "wrap" }}>
           <div style={{ maxWidth: 760 }}>
-            <span className="eyebrow"><span className="dot"></span>Top 10 cafenele • Aprilie 2026</span>
+            <span className="eyebrow"><span className="dot"></span>Rezultate reale • Aprilie 2026</span>
             <h2 className="display" style={{ marginTop: 18 }}>
               Încasări lunare reale.<br/>Locații reale.
             </h2>
             <p className="lede" style={{ marginTop: 22 }}>
-              Cifrele de mai jos sunt <strong>cifră de afaceri</strong> raportată pentru aprilie 2026. Top 10 din 188 locații active. Identitatea partenerilor anonimizată — descriem tipul de locație.
+              Cifrele de mai jos sunt <strong>cifră de afaceri</strong> raportată pentru aprilie 2026. Locații alese aleatoriu din rețeaua activă. Identitatea partenerilor anonimizată — descriem tipul de locație.
             </p>
           </div>
           <div style={{ textAlign: "right", paddingBottom: 6 }}>
-            <div style={{ fontFamily: "JetBrains Mono", fontSize: 12, color: "var(--mute)", letterSpacing: ".14em", textTransform: "uppercase" }}>// Total top 10</div>
+            <div style={{ fontFamily: "JetBrains Mono", fontSize: 12, color: "var(--mute)", letterSpacing: ".14em", textTransform: "uppercase" }}>// Total selecție</div>
             <div className="num" style={{ fontSize: 64, lineHeight: 1, marginTop: 6 }}>171.807<span style={{ fontSize: 22, color: "var(--mute)", marginLeft: 6 }}>lei</span></div>
-            <div style={{ fontSize: 13, color: "var(--mute)", marginTop: 6 }}>25.852 pahare · 10 locații</div>
+            <div style={{ fontSize: 13, color: "var(--mute)", marginTop: 6 }}>25.852 pahare · 10 locații afișate</div>
           </div>
         </div>
 
@@ -178,7 +178,7 @@ function Proof() {
             ) : (
               <div key={i} className="proof-card">
                 <div className="proof-loc">
-                  <div className="avatar" style={{ background: c.accent || "#52C4B6", color: "#1D1D1C" }}>{c.rank}</div>
+                  <div className="avatar" style={{ background: c.accent || "#52C4B6", color: "#1D1D1C", fontSize: 18 }}>☕</div>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: 16, lineHeight: 1.25 }}>{c.type}</div>
                     <div className="meta" style={{ marginTop: 2 }}>{c.city}</div>
