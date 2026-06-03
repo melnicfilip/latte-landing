@@ -221,6 +221,13 @@ h3.display { font-size: clamp(24px, 3vw, 36px); margin: 0; }
   position: absolute; background: var(--ink); color: var(--offwhite); font-size: 11px; font-weight: 600;
   letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; z-index: 4;
 }
+.stage-tag-tr { top: 8%; right: -2%; }
+.stage-tag-bl { bottom: 14%; left: -4%; }
+@media (max-width: 600px) {
+  .stage-bg { inset: 6% 0 6% 0; }
+  .stage-tag-tr { right: 4%; }
+  .stage-tag-bl { left: 4%; }
+}
 
 /* Section 2 — concept */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }

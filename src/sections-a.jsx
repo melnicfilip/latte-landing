@@ -71,8 +71,8 @@ function Hero() {
           <div style={{ position: "relative", zIndex: 2 }}>
             <Machine />
           </div>
-          <div className="stage-tag" style={{ top: "8%", right: "-2%" }}><span className="dot" style={{background:"#52C4B6"}}></span> 1m² spațiu</div>
-          <div className="stage-tag" style={{ bottom: "14%", left: "-4%" }}>200—300 ml</div>
+          <div className="stage-tag stage-tag-tr"><span className="dot" style={{background:"#52C4B6"}}></span> 1m² spațiu</div>
+          <div className="stage-tag stage-tag-bl">200—300 ml</div>
         </div>
       </div>
     </section>
